@@ -1,0 +1,4 @@
+C:\Users\d.dekanozishvili\Google Drive\Projects\Birthday\Birthday.Tools\bin\Debug\Birthday.Tools.dll
+C:\Users\d.dekanozishvili\Google Drive\Projects\Birthday\Birthday.Tools\bin\Debug\Birthday.Tools.pdb
+C:\Users\d.dekanozishvili\Google Drive\Projects\Birthday\Birthday.Tools\obj\Debug\Birthday.Tools.dll
+C:\Users\d.dekanozishvili\Google Drive\Projects\Birthday\Birthday.Tools\obj\Debug\Birthday.Tools.pdb
