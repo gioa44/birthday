@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Birthday.Web.Models.Day>
+
+<div id="reserve">
+    <ul class="x-day-list">
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="x-date-box @(item.Reserved ? "reserved" : string.Empty)">
+                    <span class="day">@item.Date.Date.Day</span>
+                    <span class="month">@item.Date.ToString("MMM", System.Globalization.CultureInfo.CurrentCulture)</span>
+                </div>
+                @if (!item.Reserved)
+                {
+                    <span class="x-button btn-reserve f-reserve" data-day="@item.Date.ToString("yyyyMMdd")">@GeneralResource.ToReserve</span>
+                }
+            </li>
+        }
+    </ul>
+</div>

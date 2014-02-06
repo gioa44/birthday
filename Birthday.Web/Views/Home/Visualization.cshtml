@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Visualization";
+}
+
+<div style="padding-top: 350px; padding-left: 700px;">
+    <div class="x-img-wrapper">
+        <img src="Image/0" class="f-img" data-id="0" />
+        <span class="f-imgupload x-btn-imgupload" data-img-id="0">Upl</span>
+    </div>
+</div>
+
+<div id="upload-section" style="display: none;">
+    @using (Html.BeginForm("imageupload", "home", FormMethod.Post, htmlAttributes: new { id = "myForm" }))
+    {
+        <input type="file" name="name" /><input id="imageUpload" type="submit" value="Upload" />
+        @Html.Hidden("imageid")
+
+    }
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/imagetools")
+
+    <script>
+        $(function () {
+
+            var processingImageID = 0;
+
+            $('.f-imgupload').click(function (e) {
+                e.preventDefault();
+
+                processingImageID = $(this).data("img-id");
+
+                var $uploadSection = $('#upload-section');
+
+                $uploadSection.find('#imageid').val(processingImageID);
+
+                var popup = new XPopup(true);
+
+                popup.setTitle("Upload");
+                popup.setContent($uploadSection.show());
+
+                registerAjaxForm($('#myForm'), function (data) {
+                    var $img = $('.f-img[data-id="' + processingImageID + '"]');
+                    var src = $img.attr('src');
+
+                    $img.attr('src', src);
+
+                    popup.hide();
+                });
+
+                popup.show();
+            });
+
+            initImageReposition($('.f-img'));
+        });
+    </script>
+}

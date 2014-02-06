@@ -1,0 +1,327 @@
+﻿html, body
+{
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI' Verdana;
+    font-size: 13px;
+    min-width: 410px;
+    min-height: 410px;
+}
+
+*
+{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+.x-center
+{
+    text-align: center;
+}
+
+.x-loader
+{
+    height: 80px;
+    width: 80px;
+    background-image: url(images/load.gif);
+    background-repeat: no-repeat;
+}
+
+    .x-loader.fixed-center
+    {
+        margin: 10px auto;
+        position: absolute;
+    }
+
+div#nav-menu
+{
+    height: 41px;
+    font-size: 1.2em;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+ul.x-nav-menu
+{
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 5%;
+    background-color: #34495e;
+    width: 100%;
+    height: 41px;
+}
+
+    ul.x-nav-menu > li
+    {
+        float: left;
+        background-color: #34495e;
+        cursor: pointer;
+        height: 41px;
+    }
+
+        ul.x-nav-menu > li:hover
+        {
+            background-color: #415b76;
+        }
+
+        ul.x-nav-menu > li > a
+        {
+            display: inline-block;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+div#content
+{
+    padding: 20px 100px;
+    position: relative;
+}
+
+.x-button
+{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+    .x-button:hover
+    {
+        background-color: #5dade2;
+    }
+
+.x-clear
+{
+    clear: both;
+}
+
+#reserve
+{
+    height: 100%;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    background-color: #333;
+    padding-top: 100px;
+}
+
+    #reserve > *
+    {
+        margin: 0 auto;
+    }
+
+ul.x-day-list
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 770px;
+    display: table;
+}
+
+    ul.x-day-list > li
+    {
+        padding: 5px;
+        float: left;
+    }
+
+        ul.x-day-list > li:hover
+        {
+            padding-bottom: 5px;
+        }
+
+        ul.x-day-list > li .btn-reserve
+        {
+            width: 70px;
+            margin: 0 15px;
+            padding-left: 0;
+            padding-right: 0;
+            position: absolute;
+            margin-top: -11px;
+        }
+
+.x-date-box
+{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #60a917;
+    text-align: center;
+    padding-top: 16px;
+    background-color: #60a917;
+    color: white;
+    font-size: 1.5em;
+}
+
+    .x-date-box .day,
+    .x-date-box .month
+    {
+        display: block;
+        vertical-align: middle;
+    }
+
+    .x-date-box.reserved
+    {
+        background-color: #e51400;
+        border: 1px solid #e51400;
+    }
+
+/* x-popup */
+.x-popup
+{
+    z-index: 1001;
+    position: fixed;
+    background-color: #FFF;
+    -moz-box-shadow: 0 0 5px 0 #373737;
+    -webkit-box-shadow: 0 0 5px 0 #373737;
+    box-shadow: 0 0 5px 0 #373737;
+    min-width: 500px;
+    outline: none;
+}
+
+    .x-popup > .title-bar
+    {
+        text-align: center;
+        background-color: #373737;
+        font-size: 15px;
+        color: #fff;
+        /*line-height: 60px;*/
+        padding: 15px;
+        /*-webkit-border-radius: 5px 5px 0 0;
+		-moz-border-radius: 5px 5px 0 0;
+		border-radius: 5px 5px 0 0;*/
+        cursor: move;
+    }
+
+        .x-popup > .title-bar.no-title
+        {
+            padding: 0;
+        }
+
+    .x-popup > .content
+    {
+        padding: 10px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        .x-popup > .content label + input[type="text"],
+        .x-popup > .content label + input[type="checkbox"],
+        .x-popup > .content label + textarea,
+        .x-popup > .content label + table,
+        .x-popup > .content label + select,
+        .x-popup > .content label + div
+        {
+            display: block;
+            margin: 10px 0;
+        }
+
+    .x-popup > .action-bar
+    {
+        bottom: 0;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        text-align: right;
+        padding: 10px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        .x-popup > .action-bar > .x-button
+        {
+            margin-right: 5px;
+        }
+
+            .x-popup > .action-bar > .x-button:last-child
+            {
+                margin-right: 0;
+            }
+
+        .x-popup > .action-bar:empty
+        {
+            display: none;
+        }
+
+    .x-popup .close-icon
+    {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        outline: none;
+        right: -12px;
+        top: -12px;
+        background: url('../images/close.png') no-repeat center #fff;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        width: 25px;
+        height: 25px;
+        -moz-box-shadow: 0 0 3px #555;
+        -webkit-box-shadow: 0 0 3px #555;
+        box-shadow: 0 0 3px #555;
+    }
+
+.x-overlay
+{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+    -moz-opacity: 0.4;
+    -khtml-opacity: 0.4;
+    opacity: 0.4;
+    display: none;
+}
+/* ~x-popup */
+
+.x-error-window
+{
+    width: 500px;
+}
+
+    .x-error-window > .title-bar
+    {
+        background-color: #ce2222;
+        color: #fff;
+    }
+
+.x-img-wrapper
+{
+    float: left;
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    cursor: move;
+    border: 1px solid #666;
+    overflow: hidden;
+    position: relative;
+}
+
+.x-btn-imgupload
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    cursor: pointer;
+    background-color: rgba(100,100,100, 0.5);
+    padding: 5px;
+}

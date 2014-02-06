@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday.Web", "Birthday.Web\Birthday.Web.csproj", "{EB1F66D0-31F7-4CF5-B72E-42B272EC669F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday.Properties", "Birthday.Properties\Birthday.Properties.csproj", "{1D363ABF-EBC8-4D5B-ABB9-A3A36380AA04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB1F66D0-31F7-4CF5-B72E-42B272EC669F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB1F66D0-31F7-4CF5-B72E-42B272EC669F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB1F66D0-31F7-4CF5-B72E-42B272EC669F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB1F66D0-31F7-4CF5-B72E-42B272EC669F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D363ABF-EBC8-4D5B-ABB9-A3A36380AA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D363ABF-EBC8-4D5B-ABB9-A3A36380AA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D363ABF-EBC8-4D5B-ABB9-A3A36380AA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D363ABF-EBC8-4D5B-ABB9-A3A36380AA04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

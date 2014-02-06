@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Reserve";
+}
+@using (Html.BeginForm())
+{
+    Html.RenderAction("ReserveDays");
+    @Html.Hidden("day");
+}
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $('.f-reserve').click(function () {
+                $('#day').val($(this).data('day'));
+                window.document.forms[0].submit();
+            });
+        });
+    </script>
+}
