@@ -1,4 +1,4 @@
-obj/
-bin/
-Birthday.v11.suo
-Birthday.Web/Birthday.Web.csproj.user
+*.suo
+*.user
+bin
+obj
