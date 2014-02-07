@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlreadyReserved" xml:space="preserve">
+    <value>"{0:dd MMM}" უკვე დაჯავშნულია</value>
+  </data>
   <data name="AnniversaryHistory" xml:space="preserve">
     <value>წინა იუბილარები</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>დახურვა</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>კონტაქტი</value>
+  </data>
+  <data name="DayReservation" xml:space="preserve">
+    <value>{0} - დაჯავშნა</value>
+  </data>
+  <data name="DaySuccessfulyReserved" xml:space="preserve">
+    <value>დღე "{0:dd MMM}" დაჯავშნულია წარმატებით</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ელ-ფოსტა</value>
+  </data>
+  <data name="EmailNotValid" xml:space="preserve">
+    <value>ელ-ფოსტის ფორმატი არასწორია</value>
+  </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>მოხდა შეცდომა, გთხოვთ გადატვირთოთ გვერდი</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>აუცილებელი ველი</value>
   </data>
   <data name="Reserve" xml:space="preserve">
     <value>ჯავშანი</value>
@@ -134,5 +158,8 @@
   </data>
   <data name="Visualization" xml:space="preserve">
     <value>ვიზუალიზაცია</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>თქვენი ელ-ფოსტა</value>
   </data>
 </root>

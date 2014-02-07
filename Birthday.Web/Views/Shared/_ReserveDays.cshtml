@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Birthday.Web.Models.Day>
 
-<div id="reserve">
+<div id="reserve-schedule">
     <ul class="x-day-list">
         @foreach (var item in Model)
         {
@@ -11,7 +11,8 @@
                 </div>
                 @if (!item.Reserved)
                 {
-                    <span class="x-button btn-reserve f-reserve" data-day="@item.Date.ToString("yyyyMMdd")">@GeneralResource.ToReserve</span>
+                    <span class="x-button btn-reserve f-reserve" data-day="@item.Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern)" 
+                        data-name="@item.Date.ToString("dd MMM")">@GeneralResource.ToReserve</span>
                 }
             </li>
         }

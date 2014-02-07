@@ -1,7 +1,10 @@
-﻿using Birthday.Web.Models;
+﻿using Birthday.Properties.Resources;
+using Birthday.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,26 +33,29 @@ namespace Birthday.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Reserve(FormCollection col)
+        public ActionResult Reserve(ReserveInfo info)
         {
-            lock (lockObject)
+            if (ModelState.IsValid)
             {
-                var day = Days.FirstOrDefault(x => x.Date.ToString("yyyyMMdd") == col["day"]);
-
-                if (day != null && !day.Reserved)
+                lock (lockObject)
                 {
-                    day.Reserved = true;
-                    //Do reservation
+                    var day = Days.FirstOrDefault(x => x.Date == info.Date);
 
-                    return RedirectToAction("Reserve");
-                }
-                else
-                {
-                    ViewBag.ErrorMessage = day.Date.ToString("dd MMMM") + " already reserved!";
+                    if (day != null && !day.Reserved)
+                    {
+                        day.Reserved = true;
+                        //Do reservation
+
+                        return Json(new { Result = string.Format(GeneralResource.DaySuccessfulyReserved, day.Date) });
+                    }
+                    else
+                    {
+                        return Json(new { Result = string.Format(GeneralResource.AlreadyReserved, day.Date) });
+                    }
                 }
             }
 
-            return View();
+            return JsonError();
         }
 
         public ActionResult Visualization()

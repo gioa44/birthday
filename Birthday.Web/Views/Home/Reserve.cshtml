@@ -1,19 +1,62 @@
-﻿@{
+﻿@model Birthday.Web.Models.ReserveInfo
+@{
     ViewBag.Title = "Reserve";
 }
-@using (Html.BeginForm())
-{
-    Html.RenderAction("ReserveDays");
-    @Html.Hidden("day");
-}
+
+@{ Html.RenderAction("ReserveDays"); }
+
+<div id="reserve">
+    @using (Html.BeginForm("Reserve", "Home", FormMethod.Post, htmlAttributes: new { id = "reserve-form", @class = "x-form" }))
+    {
+        @Html.TextBoxFor(x => x.Email, htmlAttributes: new { @class = "watermark", title = GeneralResource.YourEmail })
+        @Html.ValidationMessageFor(x => x.Email)
+        @Html.HiddenFor(x => x.Date)
+    }
+</div>
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(function () {
+            $.validator.setDefaults({
+                ignore: ""
+            });
+
             $('.f-reserve').click(function () {
-                $('#day').val($(this).data('day'));
-                window.document.forms[0].submit();
+                var day = $(this).data('day');
+                var name = $(this).data('name');
+                var title = formatString('@GeneralResource.DayReservation', [name]);
+
+                $('#Date').val(day);
+
+                var p = new XPopup(true);
+
+                p.setTitle(title);
+                p.setContent($('#reserve').show());
+                p.addActionButton("Reserve", function () {
+                    if ($('#reserve-form').valid()) {
+                        $('#reserve-form').submit();
+                    }
+                });
+
+                p.show();
+
+                registerAjaxForm($('#reserve-form'), function (data) {
+                    p.hide();
+
+                    var popup = new XPopup(true);
+                    popup.setTitle(title);
+                    popup.setContent(data.Result);
+
+                    popup.addActionButton('@GeneralResource.Close', function () {
+                        window.location.href = window.location.href
+                    });
+
+                    popup.show();
+                });
+
+                initWaterMarks();
             });
         });
     </script>

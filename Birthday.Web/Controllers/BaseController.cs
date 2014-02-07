@@ -1,9 +1,11 @@
 ﻿using Birthday.Properties;
+using Birthday.Properties.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -43,7 +45,7 @@ namespace Birthday.Web.Controllers
             }
 
             var culture = CultureInfo.CreateSpecificCulture((string)lang);
-
+            culture.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
@@ -254,6 +256,12 @@ namespace Birthday.Web.Controllers
                     default: return string.Format("application/{0}", extension);
                 }
             }
+        }
+
+        protected JsonResult JsonError()
+        {
+            Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return Json(new { Message = GeneralResource.ErrorOccured });
         }
     }
 }

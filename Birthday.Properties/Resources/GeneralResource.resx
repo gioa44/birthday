@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlreadyReserved" xml:space="preserve">
+    <value>"{0:dd MMM}" is already reserved</value>
+  </data>
   <data name="AnniversaryHistory" xml:space="preserve">
     <value>Anniversary History</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="DayReservation" xml:space="preserve">
+    <value>{0} - Reservation</value>
+  </data>
+  <data name="DaySuccessfulyReserved" xml:space="preserve">
+    <value>Day "{0:dd MMM}" is successfully reserved</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailNotValid" xml:space="preserve">
+    <value>Not valid email address</value>
+  </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>Error occured, please reload the page</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required field</value>
   </data>
   <data name="Reserve" xml:space="preserve">
     <value>Reserve</value>
@@ -134,5 +158,8 @@
   </data>
   <data name="Visualization" xml:space="preserve">
     <value>Visualization</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>Your email</value>
   </data>
 </root>

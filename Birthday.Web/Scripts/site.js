@@ -1,6 +1,7 @@
 /// <reference path="jquery.js" />
 
 $(function () {
+    //initWaterMarks();
 
     return;
 
