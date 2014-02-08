@@ -1,11 +1,74 @@
-﻿function initImageReposition($images) {
+﻿$(function () {
+
+    var processingImageID = 0;
+    $('.f-img').hide();
+    initImageReposition($('.f-img'));
+
+    $('.f-imgupload').click(function (e) {
+        e.preventDefault();
+
+        processingImageID = $(this).data("img-id");
+
+        var $uploadSection = $('#upload-section');
+
+        $uploadSection.find('#ImageIndex').val(processingImageID);
+
+        var popup = new XPopup(true);
+
+        popup.setTitle("Upload");
+        popup.setContent($uploadSection.show());
+
+        registerAjaxForm($('#img-upload-form'), function (data) {
+            var $img = $('.f-img[data-id="' + processingImageID + '"]');
+            var src = $img.attr('src');
+
+            $img.attr('src', src);
+
+            getImgProps($img);
+
+            popup.hide();
+        });
+
+        popup.show();
+    });
+});
+
+var ImgPropsLeft = "#ImageProps_{0}__Left";
+var ImgPropsTop = "#ImageProps_{0}__Top";
+var ImgPropsWidth = "#ImageProps_{0}__Width";
+
+function initImageReposition($images) {
     var preventShrink = false;
 
-    $images.load(function () {
+    $images.each(function (index, elem) {
+        var $img = $(elem);
+        var id = $img.data('id');
+
+        var $span = $('<span>');
+        $span.addClass("f-imgupload x-btn-imgupload");
+        $span.data('img-id', id);
+        $span.text('Upl');
+        $img.after($span);
+    });
+
+    $images.one('load', function () {
         var $img = $(this);
 
-        setupImageTool($img, true);
-    }).mousewheel(function (event) {
+        var pos = $img.position();
+
+        setImgProps($img);
+
+        setupImageTool($img, false);
+
+        $img.show();
+    })
+    .each(function () {
+        if (this.complete) $(this).load();
+    })
+    .mousewheel(function (event) {
+
+        event.preventDefault();
+
         var $img = $(this);
 
         //loghandle(event);
@@ -28,17 +91,20 @@
 
         var newWidth = width + step;
 
-        if ($img.parent().offset().left + $img.parent().width() < $img.offset().left + newWidth) {
+        if (step > 0 || $img.parent().offset().left + $img.parent().width() < $img.offset().left + newWidth) {
 
             $img.css('width', newWidth);
 
-            if ($img.parent().offset().top + $img.parent().height() >= $img.offset().top + $img.height()) {
+            if (step < 0 && $img.parent().offset().top + $img.parent().height() >= $img.offset().top + $img.height()) {
                 preventShrink = true;
-                $img.css('width', width);
+                newWidth = width;
+                $img.css('width', newWidth);
             }
             else {
                 setupImageTool($img);
             }
+
+            $(formatString(ImgPropsWidth, [$img.data('id')])).val(newWidth);
         }
     });
 
@@ -67,6 +133,13 @@
         $img.draggable({
             containment: [Math.floor(pOffset.left - x), Math.floor(pOffset.top - y), pOffset.left, pOffset.top], drag: function () {
                 preventShrink = false;
+            },
+            drag: function () {
+                var pos = $img.position();
+                var id = $img.data('id');
+
+                $(formatString(ImgPropsLeft, [id])).val(pos.left);
+                $(formatString(ImgPropsTop, [id])).val(pos.top);
             }
         });
     }
@@ -95,4 +168,24 @@
 
         console.log(o);
     };
+}
+
+function setImgProps($img) {
+    var id = $img.data('id');
+
+    $img.css({
+        'left': $(formatString(ImgPropsLeft, [id])).val() + 'px',
+        'top': $(formatString(ImgPropsTop, [id])).val() + 'px',
+        'width': $(formatString(ImgPropsWidth, [id])).val() + 'px'
+    });
+}
+
+function getImgProps($img) {
+    var id = $img.data('id');
+    var pos = $img.position();
+    var width = $img.width();
+
+    $(formatString(ImgPropsLeft, [id])).val(pos.left);
+    $(formatString(ImgPropsTop, [id])).val(pos.top);
+    $(formatString(ImgPropsWidth, [id])).val(width);
 }

@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BirthdayModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="BirthdayModelStoreContainer">
+          <EntitySet Name="Birthday" EntityType="BirthdayModel.Store.Birthday" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BirthdayImage" EntityType="BirthdayModel.Store.BirthdayImage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Congratulation" EntityType="BirthdayModel.Store.Congratulation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CongratulationType" EntityType="BirthdayModel.Store.CongratulationType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="File" EntityType="BirthdayModel.Store.File" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Gender" EntityType="BirthdayModel.Store.Gender" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Template" EntityType="BirthdayModel.Store.Template" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="BirthdayModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Birthday_Gender" Association="BirthdayModel.Store.FK_Birthday_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Birthday" EntitySet="Birthday" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birthday_Template" Association="BirthdayModel.Store.FK_Birthday_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="Birthday" EntitySet="Birthday" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birthday_User" Association="BirthdayModel.Store.FK_Birthday_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Birthday" EntitySet="Birthday" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BirthdayImage_Birthday" Association="BirthdayModel.Store.FK_BirthdayImage_Birthday">
+            <End Role="Birthday" EntitySet="Birthday" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.Store.FK_BirthdayImage_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Congratulation_Birthday" Association="BirthdayModel.Store.FK_Congratulation_Birthday">
+            <End Role="Birthday" EntitySet="Birthday" />
+            <End Role="Congratulation" EntitySet="Congratulation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Congratulation_Congratulation" Association="BirthdayModel.Store.FK_Congratulation_Congratulation">
+            <End Role="CongratulationType" EntitySet="CongratulationType" />
+            <End Role="Congratulation" EntitySet="Congratulation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_File_User" Association="BirthdayModel.Store.FK_File_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="File" EntitySet="File" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Birthday">
+          <Key>
+            <PropertyRef Name="BirthdayID" />
+          </Key>
+          <Property Name="BirthdayID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateID" Type="int" />
+          <Property Name="Html" Type="nvarchar(max)" />
+          <Property Name="EventDate" Type="date" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="GenderID" Type="int" />
+          <Property Name="Age" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacebookUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BirthdayImage">
+          <Key>
+            <PropertyRef Name="BirthdayImageID" />
+          </Key>
+          <Property Name="BirthdayImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BirthdayID" Type="int" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="ImageIndex" Type="int" Nullable="false" />
+          <Property Name="ImageLeft" Type="int" Nullable="false" />
+          <Property Name="ImageTop" Type="int" Nullable="false" />
+          <Property Name="ImageWidth" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Congratulation">
+          <Key>
+            <PropertyRef Name="CongratulationID" />
+          </Key>
+          <Property Name="CongratulationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BirthdayID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CongratulationType">
+          <Key>
+            <PropertyRef Name="CongratulationTypeID" />
+          </Key>
+          <Property Name="CongratulationTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Content" Type="varbinary(max)" Nullable="false" />
+          <Property Name="MimeType" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="ContentLength" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Name="TemplateID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Html" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PictureCount" Type="int" Nullable="false" />
+          <Property Name="TextCount" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Birthday_Gender">
+          <End Role="Gender" Type="BirthdayModel.Store.Gender" Multiplicity="0..1" />
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birthday_Template">
+          <End Role="Template" Type="BirthdayModel.Store.Template" Multiplicity="0..1" />
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birthday_User">
+          <End Role="User" Type="BirthdayModel.Store.User" Multiplicity="1" />
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BirthdayImage_Birthday">
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="1" />
+          <End Role="BirthdayImage" Type="BirthdayModel.Store.BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BirthdayImage_File">
+          <End Role="File" Type="BirthdayModel.Store.File" Multiplicity="1" />
+          <End Role="BirthdayImage" Type="BirthdayModel.Store.BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Congratulation_Birthday">
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="1" />
+          <End Role="Congratulation" Type="BirthdayModel.Store.Congratulation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="Congratulation">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Congratulation_Congratulation">
+          <End Role="CongratulationType" Type="BirthdayModel.Store.CongratulationType" Multiplicity="1" />
+          <End Role="Congratulation" Type="BirthdayModel.Store.Congratulation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CongratulationType">
+              <PropertyRef Name="CongratulationTypeID" />
+            </Principal>
+            <Dependent Role="Congratulation">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_File_User">
+          <End Role="User" Type="BirthdayModel.Store.User" Multiplicity="1" />
+          <End Role="File" Type="BirthdayModel.Store.File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BirthdayModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BirthdayContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="BirthdayImages" EntityType="BirthdayModel.BirthdayImage" />
+          <EntitySet Name="Congratulations" EntityType="BirthdayModel.Congratulation" />
+          <EntitySet Name="CongratulationTypes" EntityType="BirthdayModel.CongratulationType" />
+          <EntitySet Name="Files" EntityType="BirthdayModel.File" />
+          <EntitySet Name="Genders" EntityType="BirthdayModel.Gender" />
+          <EntitySet Name="Templates" EntityType="BirthdayModel.Template" />
+          <EntitySet Name="Users" EntityType="BirthdayModel.User" />
+          <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.FK_BirthdayImage_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Congratulation_Congratulation" Association="BirthdayModel.FK_Congratulation_Congratulation">
+            <End Role="CongratulationType" EntitySet="CongratulationTypes" />
+            <End Role="Congratulation" EntitySet="Congratulations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_File_User" Association="BirthdayModel.FK_File_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="File" EntitySet="Files" />
+          </AssociationSet>
+          <EntitySet Name="Birthdays" EntityType="BirthdayModel.Birthday" />
+          <AssociationSet Name="FK_Birthday_Gender" Association="BirthdayModel.FK_Birthday_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Birthday" EntitySet="Birthdays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birthday_Template" Association="BirthdayModel.FK_Birthday_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Birthday" EntitySet="Birthdays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Birthday_User" Association="BirthdayModel.FK_Birthday_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Birthday" EntitySet="Birthdays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BirthdayImage_Birthday" Association="BirthdayModel.FK_BirthdayImage_Birthday">
+            <End Role="Birthday" EntitySet="Birthdays" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Congratulation_Birthday" Association="BirthdayModel.FK_Congratulation_Birthday">
+            <End Role="Birthday" EntitySet="Birthdays" />
+            <End Role="Congratulation" EntitySet="Congratulations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BirthdayImage">
+          <Key>
+            <PropertyRef Name="BirthdayImageID" />
+          </Key>
+          <Property Type="Int32" Name="BirthdayImageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BirthdayID" Nullable="false" />
+          <Property Type="Int32" Name="FileID" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="BirthdayImage" ToRole="File" />
+          <NavigationProperty Name="Birthday" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="BirthdayImage" ToRole="Birthday" />
+          <Property Type="Int32" Name="ImageIndex" Nullable="false" />
+          <Property Type="Int32" Name="ImageLeft" Nullable="false" />
+          <Property Type="Int32" Name="ImageTop" Nullable="false" />
+          <Property Type="Int32" Name="ImageWidth" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Congratulation">
+          <Key>
+            <PropertyRef Name="CongratulationID" />
+          </Key>
+          <Property Type="Int32" Name="CongratulationID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BirthdayID" Nullable="false" />
+          <Property Type="Int32" Name="TypeID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CongratulationType" Relationship="BirthdayModel.FK_Congratulation_Congratulation" FromRole="Congratulation" ToRole="CongratulationType" />
+          <NavigationProperty Name="Birthday" Relationship="BirthdayModel.FK_Congratulation_Birthday" FromRole="Congratulation" ToRole="Birthday" />
+        </EntityType>
+        <EntityType Name="CongratulationType">
+          <Key>
+            <PropertyRef Name="CongratulationTypeID" />
+          </Key>
+          <Property Type="Int32" Name="CongratulationTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Congratulations" Relationship="BirthdayModel.FK_Congratulation_Congratulation" FromRole="CongratulationType" ToRole="Congratulation" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Type="Int32" Name="FileID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="MimeType" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ContentLength" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreateUserID" Nullable="false" />
+          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="File" ToRole="BirthdayImage" />
+          <NavigationProperty Name="User" Relationship="BirthdayModel.FK_File_User" FromRole="File" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Type="Int32" Name="GenderID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Birthdays" Relationship="BirthdayModel.FK_Birthday_Gender" FromRole="Gender" ToRole="Birthday" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="TemplateID" />
+          </Key>
+          <Property Type="Int32" Name="TemplateID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Html" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PictureCount" Nullable="false" />
+          <Property Type="Int32" Name="TextCount" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Birthdays" Relationship="BirthdayModel.FK_Birthday_Template" FromRole="Template" ToRole="Birthday" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ExpireDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Files" Relationship="BirthdayModel.FK_File_User" FromRole="User" ToRole="File" />
+          <NavigationProperty Name="Birthdays" Relationship="BirthdayModel.FK_Birthday_User" FromRole="User" ToRole="Birthday" />
+        </EntityType>
+        <Association Name="FK_BirthdayImage_File">
+          <End Type="BirthdayModel.File" Role="File" Multiplicity="1" />
+          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Congratulation_Congratulation">
+          <End Type="BirthdayModel.CongratulationType" Role="CongratulationType" Multiplicity="1" />
+          <End Type="BirthdayModel.Congratulation" Role="Congratulation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CongratulationType">
+              <PropertyRef Name="CongratulationTypeID" />
+            </Principal>
+            <Dependent Role="Congratulation">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_File_User">
+          <End Type="BirthdayModel.User" Role="User" Multiplicity="1" />
+          <End Type="BirthdayModel.File" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Birthday">
+          <Key>
+            <PropertyRef Name="BirthdayID" />
+          </Key>
+          <Property Type="Int32" Name="BirthdayID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TemplateID" />
+          <Property Type="String" Name="Html" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="EventDate" Precision="0" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
+          <Property Type="Int32" Name="GenderID" />
+          <Property Type="Int32" Name="Age" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobileNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FacebookUrl" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreateUserID" Nullable="false" />
+          <Property Type="DateTime" Name="EditDate" Precision="3" />
+          <NavigationProperty Name="Gender" Relationship="BirthdayModel.FK_Birthday_Gender" FromRole="Birthday" ToRole="Gender" />
+          <NavigationProperty Name="Template" Relationship="BirthdayModel.FK_Birthday_Template" FromRole="Birthday" ToRole="Template" />
+          <NavigationProperty Name="User" Relationship="BirthdayModel.FK_Birthday_User" FromRole="Birthday" ToRole="User" />
+          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="Birthday" ToRole="BirthdayImage" />
+          <NavigationProperty Name="Congratulations" Relationship="BirthdayModel.FK_Congratulation_Birthday" FromRole="Birthday" ToRole="Congratulation" />
+        </EntityType>
+        <Association Name="FK_Birthday_Gender">
+          <End Type="BirthdayModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birthday_Template">
+          <End Type="BirthdayModel.Template" Role="Template" Multiplicity="0..1" />
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Birthday_User">
+          <End Type="BirthdayModel.User" Role="User" Multiplicity="1" />
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Birthday">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BirthdayImage_Birthday">
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
+          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Congratulation_Birthday">
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
+          <End Type="BirthdayModel.Congratulation" Role="Congratulation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="Congratulation">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BirthdayModelStoreContainer" CdmEntityContainer="BirthdayContext">
+          <EntitySetMapping Name="BirthdayImages">
+            <EntityTypeMapping TypeName="BirthdayModel.BirthdayImage">
+              <MappingFragment StoreEntitySet="BirthdayImage">
+                <ScalarProperty Name="ImageWidth" ColumnName="ImageWidth" />
+                <ScalarProperty Name="ImageTop" ColumnName="ImageTop" />
+                <ScalarProperty Name="ImageLeft" ColumnName="ImageLeft" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+                <ScalarProperty Name="BirthdayImageID" ColumnName="BirthdayImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Congratulations">
+            <EntityTypeMapping TypeName="BirthdayModel.Congratulation">
+              <MappingFragment StoreEntitySet="Congratulation">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+                <ScalarProperty Name="CongratulationID" ColumnName="CongratulationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CongratulationTypes">
+            <EntityTypeMapping TypeName="BirthdayModel.CongratulationType">
+              <MappingFragment StoreEntitySet="CongratulationType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CongratulationTypeID" ColumnName="CongratulationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="BirthdayModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+                <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="BirthdayModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="BirthdayModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TextCount" ColumnName="TextCount" />
+                <ScalarProperty Name="PictureCount" ColumnName="PictureCount" />
+                <ScalarProperty Name="Html" ColumnName="Html" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BirthdayModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Birthdays">
+            <EntityTypeMapping TypeName="BirthdayModel.Birthday">
+              <MappingFragment StoreEntitySet="Birthday">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FacebookUrl" ColumnName="FacebookUrl" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Html" ColumnName="Html" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

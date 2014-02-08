@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f1920474bb74929822668248f0481f2" Name="Diagram1">
+        <EntityTypeShape EntityType="BirthdayModel.BirthdayImage" Width="1.5" PointX="11.100940251304275" PointY="30.127079098544588" />
+        <EntityTypeShape EntityType="BirthdayModel.Congratulation" Width="1.5" PointX="1.58319730199091" PointY="8.2204531171454356" />
+        <EntityTypeShape EntityType="BirthdayModel.CongratulationType" Width="1.5" PointX="2.3814760029229691" PointY="13.1697868170076" />
+        <EntityTypeShape EntityType="BirthdayModel.File" Width="1.5" PointX="9.6956358131466587" PointY="30.794379263554877" />
+        <EntityTypeShape EntityType="BirthdayModel.Gender" Width="1.5" PointX="10.626501660154435" PointY="4.8157487832083126" />
+        <EntityTypeShape EntityType="BirthdayModel.Template" Width="1.5" PointX="3.1645983509554521" PointY="4.8815136127553478" />
+        <EntityTypeShape EntityType="BirthdayModel.User" Width="1.5" PointX="10.903001730750781" PointY="29.621208636845093" />
+        <AssociationConnector Association="BirthdayModel.FK_BirthdayImage_File" />
+        <AssociationConnector Association="BirthdayModel.FK_Congratulation_Congratulation" />
+        <AssociationConnector Association="BirthdayModel.FK_File_User" />
+        <EntityTypeShape EntityType="BirthdayModel.Birthday" Width="1.5" PointX="1.4905987575140776" PointY="16.2750520930975" />
+        <AssociationConnector Association="BirthdayModel.FK_Birthday_Gender" />
+        <AssociationConnector Association="BirthdayModel.FK_Birthday_Template" />
+        <AssociationConnector Association="BirthdayModel.FK_Birthday_User" />
+        <AssociationConnector Association="BirthdayModel.FK_BirthdayImage_Birthday" />
+        <AssociationConnector Association="BirthdayModel.FK_Congratulation_Birthday" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

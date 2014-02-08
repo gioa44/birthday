@@ -17,11 +17,11 @@ namespace Birthday.Web
 
             routes.MapRoute(
                 name: "ImageRoute",
-                url: "{controller}/Image/{imageid}",
+                url: "{controller}/BirthdayImage/{imageIndex}",
                 defaults: new
                 {
-                    controller = "home",
-                    action = "file",
+                    controller = "Home",
+                    action = "GetBirthdayImage",
                     imageid = UrlParameter.Optional
                 }
             );
@@ -31,8 +31,8 @@ namespace Birthday.Web
                 url: "{controller}/{action}/{lang}",
                 defaults: new
                 {
-                    controller = "home",
-                    action = "index",
+                    controller = "Home",
+                    action = "Index",
                     lang = UrlParameter.Optional
                 }
             );

@@ -132,7 +132,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
+    <Compile Include="Models\VisualizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +249,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Birthday.Domain\Birthday.Domain.csproj">
+      <Project>{487ad6c8-76e7-45ef-8ca4-6749be3ff250}</Project>
+      <Name>Birthday.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Birthday.Properties\Birthday.Properties.csproj">
       <Project>{1d363abf-ebc8-4d5b-abb9-a3a36380aa04}</Project>
       <Name>Birthday.Properties</Name>

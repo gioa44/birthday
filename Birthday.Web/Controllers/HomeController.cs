@@ -1,7 +1,9 @@
-﻿using Birthday.Properties.Resources;
+﻿using Birthday.Domain.Services;
+using Birthday.Properties.Resources;
 using Birthday.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -12,10 +14,10 @@ namespace Birthday.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private static IEnumerable<Day> Days;
         private static object lockObject = new object();
-        //
-        // GET: /Home/
+        private BirthdayService _BirthdayService = new BirthdayService();
+        private int _BirthdayID = 9;
+        private int _UserID = 3;
 
         public ActionResult Index()
         {
@@ -35,32 +37,77 @@ namespace Birthday.Web.Controllers
         [HttpPost]
         public ActionResult Reserve(ReserveInfo info)
         {
-            if (ModelState.IsValid)
+            try
             {
-                lock (lockObject)
+                if (ModelState.IsValid)
                 {
-                    var day = Days.FirstOrDefault(x => x.Date == info.Date);
-
-                    if (day != null && !day.Reserved)
+                    lock (lockObject)
                     {
-                        day.Reserved = true;
-                        //Do reservation
+                        var vacantDays = GetVacantDays();
 
-                        return Json(new { Result = string.Format(GeneralResource.DaySuccessfulyReserved, day.Date) });
-                    }
-                    else
-                    {
-                        return Json(new { Result = string.Format(GeneralResource.AlreadyReserved, day.Date) });
+                        var day = vacantDays.FirstOrDefault(x => x.Date == info.Date);
+
+                        if (day != null && !day.Reserved)
+                        {
+                            var id = _BirthdayService.ReserveBirthday(day.Date, info.Email);
+                            if (id > 0)
+                            {
+                                return Json(new { Result = string.Format(GeneralResource.DaySuccessfullyReserved, day.Date) });
+                            }
+                        }
+                        else
+                        {
+                            return Json(new { Result = string.Format(GeneralResource.AlreadyReserved, day.Date) });
+                        }
                     }
                 }
             }
+            catch
+            {
 
+            }
             return JsonError();
         }
 
         public ActionResult Visualization()
         {
-            return View();
+            var tmpl = _BirthdayService.GetTemplate(1);
+            var birthday = _BirthdayService.Get(_BirthdayID);
+
+            var model = new VisualizationViewModel { Html = birthday.Html ?? tmpl.Html };
+
+            model.ImageProps = new List<ImageInfo>();
+
+            using (var service = new BirthdayImageService())
+            {
+                service.GetImages(_BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
+                {
+                    Index = x.ImageIndex,
+                    Left = x.ImageLeft,
+                    Top = x.ImageTop,
+                    Width = x.ImageWidth
+                }));
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Visualization(VisualizationViewModel model)
+        {
+            //var tmpl = _BirthdayService.GetTemplate(1);
+
+            //var model = new VisualizationViewModel { Html = tmpl.Html };
+
+            using (var service = new BirthdayImageService())
+            {
+                foreach (var item in model.ImageProps)
+                {
+                    service.UpdateImageProps(_BirthdayID, item.Index, item.Left, item.Top, item.Width);
+                }
+            }
+
+            return RedirectToAction("Visualization");
         }
 
         public ActionResult AnniversaryHistory()
@@ -75,49 +122,75 @@ namespace Birthday.Web.Controllers
 
         public PartialViewResult ReserveDays()
         {
-            if (Days == null)
-            {
-                Days = GetDays();
-            }
-
-            return PartialView("_ReserveDays", Days);
+            return PartialView("_ReserveDays", GetVacantDays());
         }
 
-        public ImageResult File(int imageId)
+        public ImageResult GetBirthdayImage(int imageIndex)
         {
-            return new ImageResult("/App_Data/image.jpg");
+            using (var service = new BirthdayImageService())
+            {
+                var image = service.GetImage(_BirthdayID, imageIndex);
+
+                return new ImageResult(new MemoryStream(image.File.Content), image.File.MimeType);
+            }
         }
 
         [HttpPost]
-        public JsonResult ImageUpload()
+        public JsonResult ImageUpload(int imageIndex)
         {
-            var fileContent = Request.Files[0].InputStream;
-
-            using (var file = System.IO.File.Open(Server.MapPath("~/App_Data/image.jpg"), System.IO.FileMode.OpenOrCreate))
+            try
             {
-                var arr = new byte[fileContent.Length];
+                var file = Request.Files[0];
 
-                fileContent.Read(arr, 0, arr.Length);
+                var content = new byte[file.InputStream.Length];
 
-                file.Write(arr, 0, arr.Length);
+                file.InputStream.Read(content, 0, content.Length);
+
+                using (var service = new BirthdayImageService())
+                {
+                    var uploaded = service.SaveImage(content, file.ContentType, _BirthdayID, imageIndex, _UserID);
+                    if (uploaded)
+                    {
+                        return Json(new { Result = "Ok" });
+                    }
+                    else
+                    {
+                        return JsonError();
+                    }
+                }
             }
+            catch { }
 
-            return Json(new { Result = "Ok" });
+            return JsonError();
         }
 
-        private static IEnumerable<Day> GetDays()
+        private IEnumerable<Day> GetVacantDays()
         {
-            var date = DateTime.Today;
+            var days = new List<Day>();
+            var date = DateTime.Today.AddDays(1); //Begin from tomorrow
+            var endDate = date.AddDays(6);
 
-            return new List<Day>{
-                new Day { Date = date.AddDays(1), Reserved = true },
-                new Day { Date = date.AddDays(2), Reserved = false },
-                new Day { Date = date.AddDays(3), Reserved = false },
-                new Day { Date = date.AddDays(4), Reserved = true },
-                new Day { Date = date.AddDays(5), Reserved = false },
-                new Day { Date = date.AddDays(6), Reserved = false },
-                new Day { Date = date.AddDays(7), Reserved = false }
-            };
+            var reservedDays = _BirthdayService.GetAll()
+                .Where(x => x.EventDate >= date && x.EventDate <= endDate)
+                .Select(x => x.EventDate);
+
+            for (int i = 0; i < 7; i++)
+            {
+                date = date.AddDays(i);
+                days.Add(new Day
+                {
+                    Date = date,
+                    Reserved = reservedDays.Contains(date)
+                });
+            }
+
+            return days;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _BirthdayService.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

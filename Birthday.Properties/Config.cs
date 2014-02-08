@@ -17,5 +17,7 @@ namespace Birthday.Properties
                 return (ConfigurationManager.GetSection("system.web/globalization") as GlobalizationSection).Culture;
             }
         }
+
+        public static int PasswordLength { get { return int.Parse(ConfigurationManager.AppSettings["PasswordLength"]); } }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday.Properties", "Birt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday.Tools", "Birthday.Tools\Birthday.Tools.csproj", "{6E4C018A-AD92-44E0-B376-1DCBCDA114C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Birthday.Domain", "Birthday.Domain\Birthday.Domain.csproj", "{487AD6C8-76E7-45EF-8CA4-6749BE3FF250}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{6E4C018A-AD92-44E0-B376-1DCBCDA114C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4C018A-AD92-44E0-B376-1DCBCDA114C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E4C018A-AD92-44E0-B376-1DCBCDA114C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487AD6C8-76E7-45EF-8CA4-6749BE3FF250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487AD6C8-76E7-45EF-8CA4-6749BE3FF250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487AD6C8-76E7-45EF-8CA4-6749BE3FF250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487AD6C8-76E7-45EF-8CA4-6749BE3FF250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

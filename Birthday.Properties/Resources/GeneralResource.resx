@@ -132,7 +132,7 @@
   <data name="DayReservation" xml:space="preserve">
     <value>{0} - Reservation</value>
   </data>
-  <data name="DaySuccessfulyReserved" xml:space="preserve">
+  <data name="DaySuccessfullyReserved" xml:space="preserve">
     <value>Day "{0:dd MMM}" is successfully reserved</value>
   </data>
   <data name="Email" xml:space="preserve">
@@ -152,6 +152,9 @@
   </data>
   <data name="Rules" xml:space="preserve">
     <value>Rules</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="ToReserve" xml:space="preserve">
     <value>Reserve</value>

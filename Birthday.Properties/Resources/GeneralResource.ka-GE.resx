@@ -132,7 +132,7 @@
   <data name="DayReservation" xml:space="preserve">
     <value>{0} - დაჯავშნა</value>
   </data>
-  <data name="DaySuccessfulyReserved" xml:space="preserve">
+  <data name="DaySuccessfullyReserved" xml:space="preserve">
     <value>დღე "{0:dd MMM}" დაჯავშნულია წარმატებით</value>
   </data>
   <data name="Email" xml:space="preserve">
@@ -152,6 +152,9 @@
   </data>
   <data name="Rules" xml:space="preserve">
     <value>წესები</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>შენახვა</value>
   </data>
   <data name="ToReserve" xml:space="preserve">
     <value>დაჯავშნა</value>
