@@ -9,8 +9,16 @@ namespace Birthday.Domain.Services
 {
     public class BirthdayImageService : DomainServiceBase<BirthdayImage>
     {
-        public bool SaveImage(byte[] content, string mimeType, int birthdayID, int imageIndex, int userID)
+        public bool SaveImage(byte[] data, string mimeType, int birthdayID, int imageIndex, int userID, ref string errorMessage)
         {
+            //Get TemplateID
+            var templateID = new BirthdayService(_DbContext).GetTemplateID(birthdayID);
+
+            if (!new TemplateService(_DbContext).ValidateImage(templateID, imageIndex, data, ref errorMessage))
+            {
+                return false;
+            }
+
             var image = GetAll().FirstOrDefault(x => x.BirthdayID == birthdayID && x.ImageIndex == imageIndex);
 
             if (image == null)
@@ -25,8 +33,8 @@ namespace Birthday.Domain.Services
                     File = new File
                     {
                         Name = string.Empty,
-                        Content = ImageTool.AutoOrientImageFile(content),
-                        ContentLength = content.Length,
+                        Content = ImageTool.AutoOrientImageFile(data),
+                        ContentLength = data.Length,
                         CreateDate = DateTime.Now,
                         CreateUserID = userID,
                         MimeType = mimeType
@@ -37,12 +45,16 @@ namespace Birthday.Domain.Services
             }
             else
             {
-                _DbContext.Files.Remove(image.File);
+                if (image.File != null)
+                {
+                    _DbContext.Files.Remove(image.File);
+                }
+
                 image.File = new File
                     {
                         Name = string.Empty,
-                        Content = content,
-                        ContentLength = content.Length,
+                        Content = data,
+                        ContentLength = data.Length,
                         CreateDate = DateTime.Now,
                         CreateUserID = userID,
                         MimeType = mimeType
@@ -59,11 +71,6 @@ namespace Birthday.Domain.Services
             var image = GetAll().FirstOrDefault(x => x.BirthdayID == birthdayID && x.ImageIndex == imageIndex);
 
             return image;
-        }
-
-        public List<BirthdayImage> GetImages(int birthdayID)
-        {
-            return GetAll().Where(x => x.BirthdayID == birthdayID).ToList();
         }
 
         public void UpdateImageProps(int birthdayID, int imageIndex, int left, int top, int width)

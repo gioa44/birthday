@@ -16,8 +16,8 @@ namespace Birthday.Domain
     {
         public Birthday()
         {
-            this.BirthdayImages = new HashSet<BirthdayImage>();
             this.Congratulations = new HashSet<Congratulation>();
+            this.BirthdayImages = new HashSet<BirthdayImage>();
         }
     
         public int BirthdayID { get; set; }
@@ -39,7 +39,7 @@ namespace Birthday.Domain
         public virtual Gender Gender { get; set; }
         public virtual Template Template { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<BirthdayImage> BirthdayImages { get; set; }
         public virtual ICollection<Congratulation> Congratulations { get; set; }
+        public virtual ICollection<BirthdayImage> BirthdayImages { get; set; }
     }
 }

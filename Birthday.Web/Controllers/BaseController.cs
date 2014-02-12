@@ -258,10 +258,10 @@ namespace Birthday.Web.Controllers
             }
         }
 
-        protected JsonResult JsonError()
+        protected JsonResult JsonError(string message = null)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json(new { Message = GeneralResource.ErrorOccured });
+            return Json(new { Message = message ?? GeneralResource.ErrorOccured });
         }
     }
 }

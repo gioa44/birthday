@@ -58,5 +58,19 @@ namespace Birthday.Tools
                 return original.ToByteArray();
             }
         }
+
+        public class ImageInfo
+        {
+            public int Width { get; set; }
+            public int Height { get; set; }
+
+            public ImageInfo(byte[] data)
+            {
+                var image = new ImageMagick.MagickImage(data);
+
+                Width = image.Width;
+                Height = image.Height;
+            }
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace Birthday.Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<BirthdayImage> BirthdayImages { get; set; }
         public DbSet<Congratulation> Congratulations { get; set; }
         public DbSet<CongratulationType> CongratulationTypes { get; set; }
         public DbSet<File> Files { get; set; }
@@ -33,5 +32,7 @@ namespace Birthday.Domain
         public DbSet<Template> Templates { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Birthday> Birthdays { get; set; }
+        public DbSet<TemplateImage> TemplateImages { get; set; }
+        public DbSet<BirthdayImage> BirthdayImages { get; set; }
     }
 }

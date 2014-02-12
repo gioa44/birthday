@@ -12,17 +12,16 @@ namespace Birthday.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class BirthdayImage
+    public partial class TemplateImage
     {
-        public int BirthdayImageID { get; set; }
-        public int BirthdayID { get; set; }
-        public Nullable<int> FileID { get; set; }
+        public int TemplateImageID { get; set; }
+        public int TemplateID { get; set; }
         public int ImageIndex { get; set; }
         public int ImageLeft { get; set; }
         public int ImageTop { get; set; }
         public int ImageWidth { get; set; }
+        public int ImageHeight { get; set; }
     
-        public virtual Birthday Birthday { get; set; }
-        public virtual File File { get; set; }
+        public virtual Template Template { get; set; }
     }
 }

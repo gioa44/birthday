@@ -80,11 +80,15 @@
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BaseContext.cs" />
+    <Compile Include="Services\BirthdayContextWrapper.cs" />
+    <Compile Include="Services\DomainServiceBase.cs" />
     <Compile Include="Services\BirthdayImageService.cs" />
     <Compile Include="Services\BirthdayService.cs" />
     <Compile Include="Services\TemplateService.cs" />
     <Compile Include="Template.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateImage.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

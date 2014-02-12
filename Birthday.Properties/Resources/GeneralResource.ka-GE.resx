@@ -144,6 +144,9 @@
   <data name="ErrorOccured" xml:space="preserve">
     <value>მოხდა შეცდომა, გთხოვთ გადატვირთოთ გვერდი</value>
   </data>
+  <data name="ImageDimensionsWarning" xml:space="preserve">
+    <value>ამ ჩარჩოსთვის სურათის მინიმალური დაშვებული ზომაა - სიგრძე: {0} და სიმაღლე: {1}</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>აუცილებელი ველი</value>
   </data>

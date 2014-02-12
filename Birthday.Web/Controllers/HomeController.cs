@@ -71,34 +71,48 @@ namespace Birthday.Web.Controllers
 
         public ActionResult Visualization()
         {
-            var tmpl = _BirthdayService.GetTemplate(1);
             var birthday = _BirthdayService.Get(_BirthdayID);
 
-            var model = new VisualizationViewModel { Html = birthday.Html ?? tmpl.Html };
+            var model = new VisualizationViewModel { Html = birthday.Html };
 
             model.ImageProps = new List<ImageInfo>();
 
-            using (var service = new BirthdayImageService())
+            var templateList = new TemplateService(_BirthdayService).GetAll().ToList();
+
+            var selectList = new SelectList(templateList, "TemplateID", "Title");
+
+            model.TemplateList = selectList;
+            model.TemplateID = birthday.TemplateID;
+
+            _BirthdayService.GetBirthdayImages(_BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
             {
-                service.GetImages(_BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
-                {
-                    Index = x.ImageIndex,
-                    Left = x.ImageLeft,
-                    Top = x.ImageTop,
-                    Width = x.ImageWidth
-                }));
-            }
+                Index = x.ImageIndex,
+                Left = x.ImageLeft,
+                Top = x.ImageTop,
+                Width = x.ImageWidth
+            }));
 
             return View(model);
         }
 
         [HttpPost]
+        public ActionResult SetTemplate(int templateID)
+        {
+            try
+            {
+                _BirthdayService.SetTemplate(_BirthdayID, templateID);
+            }
+            catch (Exception)
+            {
+                return JsonError();
+            }
+
+            return Json(new { Result = "Ok" });
+        }
+
+        [HttpPost]
         public ActionResult Visualization(VisualizationViewModel model)
         {
-            //var tmpl = _BirthdayService.GetTemplate(1);
-
-            //var model = new VisualizationViewModel { Html = tmpl.Html };
-
             using (var service = new BirthdayImageService())
             {
                 foreach (var item in model.ImageProps)
@@ -131,6 +145,11 @@ namespace Birthday.Web.Controllers
             {
                 var image = service.GetImage(_BirthdayID, imageIndex);
 
+                if (image == null || image.File == null)
+                {
+                    return new ImageResult(Server.MapPath("~/content/images/dot.png"));
+                }
+
                 return new ImageResult(new MemoryStream(image.File.Content), image.File.MimeType);
             }
         }
@@ -148,14 +167,16 @@ namespace Birthday.Web.Controllers
 
                 using (var service = new BirthdayImageService())
                 {
-                    var uploaded = service.SaveImage(content, file.ContentType, _BirthdayID, imageIndex, _UserID);
+                    string errorMessage = null;
+
+                    var uploaded = service.SaveImage(content, file.ContentType, _BirthdayID, imageIndex, _UserID, ref errorMessage);
                     if (uploaded)
                     {
                         return Json(new { Result = "Ok" });
                     }
                     else
                     {
-                        return JsonError();
+                        return JsonError(errorMessage);
                     }
                 }
             }

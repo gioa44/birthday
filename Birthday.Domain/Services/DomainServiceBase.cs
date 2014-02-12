@@ -8,26 +8,20 @@ using System.Threading.Tasks;
 
 namespace Birthday.Domain.Services
 {
-    public abstract class DomainServiceBase<T> : IDisposable where T : class /*T=Model*/
+    public abstract class DomainServiceBase<T> : BirthdayContextContainer, IDisposable where T : class /*T=Model*/
     {
-        public DbContextConfiguration Configuration
+         public DomainServiceBase(BirthdayContextContainer container)
+            : base(container)
         {
-            get
-            {
-                return _DbContext.Configuration;
-            }
         }
 
-        protected readonly BirthdayContext _DbContext;
-
         public DomainServiceBase()
-            : this(new BirthdayContext())
+            : base(new BirthdayContext())
         { }
 
         public DomainServiceBase(BirthdayContext context)
-        {
-            _DbContext = context;
-        }
+            : base(context)
+        { }
 
         public virtual IQueryable<T> GetAll()
         {
@@ -77,16 +71,6 @@ namespace Birthday.Domain.Services
             {
                 Delete(entity);
             }
-        }
-
-        public virtual void SaveChanges()
-        {
-            _DbContext.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _DbContext.Dispose();
         }
     }
 }

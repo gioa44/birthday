@@ -31,6 +31,17 @@
 
         popup.show();
     });
+
+    $('#TemplateID').change(function () {
+        var id = $(this).val() || 0;
+
+        if(id > 0)
+        {
+            ajaxCall('/home/SetTemplate', { TemplateID: id }, function () {
+                window.location.href = window.location.href;
+            });
+        }
+    });
 });
 
 var ImgPropsLeft = "#ImageProps_{0}__Left";
@@ -59,7 +70,7 @@ function initImageReposition($images) {
         setImgProps($img);
 
         setupImageTool($img, false);
-
+        console.log($img.data('id') + " loaded");
         $img.show();
     })
     .each(function () {
@@ -119,12 +130,8 @@ function initImageReposition($images) {
 
         var pOffset = $parent.offset();
 
-        console.log("pWidth: " + pWidth + ", pHeight: " + pHeight);
-
         var x = width - pWidth;
         var y = height - pHeight;
-
-        console.log("Coord: " + x + " " + y);
 
         if ((typeof moveToCenter !== 'undefined') && moveToCenter == true) {
             $img.css({ 'left': -x / 2, 'top': -y / 2 });
@@ -134,12 +141,11 @@ function initImageReposition($images) {
             containment: [Math.floor(pOffset.left - x), Math.floor(pOffset.top - y), pOffset.left, pOffset.top], drag: function () {
                 preventShrink = false;
             },
-            drag: function () {
-                var pos = $img.position();
+            drag: function (event, ui) {
                 var id = $img.data('id');
 
-                $(formatString(ImgPropsLeft, [id])).val(pos.left);
-                $(formatString(ImgPropsTop, [id])).val(pos.top);
+                $(formatString(ImgPropsLeft, [id])).val(ui.position.left);
+                $(formatString(ImgPropsTop, [id])).val(ui.position.top);
             }
         });
     }

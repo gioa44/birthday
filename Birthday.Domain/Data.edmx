@@ -13,6 +13,7 @@
           <EntitySet Name="File" EntityType="BirthdayModel.Store.File" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Gender" EntityType="BirthdayModel.Store.Gender" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Template" EntityType="BirthdayModel.Store.Template" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TemplateImage" EntityType="BirthdayModel.Store.TemplateImage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="BirthdayModel.Store.User" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Birthday_Gender" Association="BirthdayModel.Store.FK_Birthday_Gender">
             <End Role="Gender" EntitySet="Gender" />
@@ -46,6 +47,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="File" EntitySet="File" />
           </AssociationSet>
+          <AssociationSet Name="FK_TemplateImage_Template" Association="BirthdayModel.Store.FK_TemplateImage_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateImage" EntitySet="TemplateImage" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Birthday">
           <Key>
@@ -73,7 +78,7 @@
           </Key>
           <Property Name="BirthdayImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="BirthdayID" Type="int" Nullable="false" />
-          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="FileID" Type="int" />
           <Property Name="ImageIndex" Type="int" Nullable="false" />
           <Property Name="ImageLeft" Type="int" Nullable="false" />
           <Property Name="ImageTop" Type="int" Nullable="false" />
@@ -126,6 +131,18 @@
           <Property Name="PictureCount" Type="int" Nullable="false" />
           <Property Name="TextCount" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TemplateImage">
+          <Key>
+            <PropertyRef Name="TemplateImageID" />
+          </Key>
+          <Property Name="TemplateImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateID" Type="int" Nullable="false" />
+          <Property Name="ImageIndex" Type="int" Nullable="false" />
+          <Property Name="ImageLeft" Type="int" Nullable="false" />
+          <Property Name="ImageTop" Type="int" Nullable="false" />
+          <Property Name="ImageWidth" Type="int" Nullable="false" />
+          <Property Name="ImageHeight" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -188,7 +205,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BirthdayImage_File">
-          <End Role="File" Type="BirthdayModel.Store.File" Multiplicity="1" />
+          <End Role="File" Type="BirthdayModel.Store.File" Multiplicity="0..1" />
           <End Role="BirthdayImage" Type="BirthdayModel.Store.BirthdayImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="File">
@@ -235,22 +252,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TemplateImage_Template">
+          <End Role="Template" Type="BirthdayModel.Store.Template" Multiplicity="1" />
+          <End Role="TemplateImage" Type="BirthdayModel.Store.TemplateImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="TemplateImage">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BirthdayModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BirthdayContext" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="BirthdayImages" EntityType="BirthdayModel.BirthdayImage" />
           <EntitySet Name="Congratulations" EntityType="BirthdayModel.Congratulation" />
           <EntitySet Name="CongratulationTypes" EntityType="BirthdayModel.CongratulationType" />
           <EntitySet Name="Files" EntityType="BirthdayModel.File" />
           <EntitySet Name="Genders" EntityType="BirthdayModel.Gender" />
           <EntitySet Name="Templates" EntityType="BirthdayModel.Template" />
           <EntitySet Name="Users" EntityType="BirthdayModel.User" />
-          <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.FK_BirthdayImage_File">
-            <End Role="File" EntitySet="Files" />
-            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
-          </AssociationSet>
           <AssociationSet Name="FK_Congratulation_Congratulation" Association="BirthdayModel.FK_Congratulation_Congratulation">
             <End Role="CongratulationType" EntitySet="CongratulationTypes" />
             <End Role="Congratulation" EntitySet="Congratulations" />
@@ -272,29 +296,25 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Birthday" EntitySet="Birthdays" />
           </AssociationSet>
-          <AssociationSet Name="FK_BirthdayImage_Birthday" Association="BirthdayModel.FK_BirthdayImage_Birthday">
-            <End Role="Birthday" EntitySet="Birthdays" />
-            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
-          </AssociationSet>
           <AssociationSet Name="FK_Congratulation_Birthday" Association="BirthdayModel.FK_Congratulation_Birthday">
             <End Role="Birthday" EntitySet="Birthdays" />
             <End Role="Congratulation" EntitySet="Congratulations" />
           </AssociationSet>
+          <EntitySet Name="TemplateImages" EntityType="BirthdayModel.TemplateImage" />
+          <AssociationSet Name="FK_TemplateImage_Template" Association="BirthdayModel.FK_TemplateImage_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="TemplateImage" EntitySet="TemplateImages" />
+          </AssociationSet>
+          <EntitySet Name="BirthdayImages" EntityType="BirthdayModel.BirthdayImage" />
+          <AssociationSet Name="FK_BirthdayImage_Birthday" Association="BirthdayModel.FK_BirthdayImage_Birthday">
+            <End Role="Birthday" EntitySet="Birthdays" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.FK_BirthdayImage_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="BirthdayImage" EntitySet="BirthdayImages" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BirthdayImage">
-          <Key>
-            <PropertyRef Name="BirthdayImageID" />
-          </Key>
-          <Property Type="Int32" Name="BirthdayImageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="BirthdayID" Nullable="false" />
-          <Property Type="Int32" Name="FileID" Nullable="false" />
-          <NavigationProperty Name="File" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="BirthdayImage" ToRole="File" />
-          <NavigationProperty Name="Birthday" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="BirthdayImage" ToRole="Birthday" />
-          <Property Type="Int32" Name="ImageIndex" Nullable="false" />
-          <Property Type="Int32" Name="ImageLeft" Nullable="false" />
-          <Property Type="Int32" Name="ImageTop" Nullable="false" />
-          <Property Type="Int32" Name="ImageWidth" Nullable="false" />
-        </EntityType>
         <EntityType Name="Congratulation">
           <Key>
             <PropertyRef Name="CongratulationID" />
@@ -326,8 +346,8 @@
           <Property Type="Int32" Name="ContentLength" Nullable="false" />
           <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="CreateUserID" Nullable="false" />
-          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="File" ToRole="BirthdayImage" />
           <NavigationProperty Name="User" Relationship="BirthdayModel.FK_File_User" FromRole="File" ToRole="User" />
+          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="File" ToRole="BirthdayImage" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -349,6 +369,7 @@
           <Property Type="Int32" Name="TextCount" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <NavigationProperty Name="Birthdays" Relationship="BirthdayModel.FK_Birthday_Template" FromRole="Template" ToRole="Birthday" />
+          <NavigationProperty Name="TemplateImages" Relationship="BirthdayModel.FK_TemplateImage_Template" FromRole="Template" ToRole="TemplateImage" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -364,18 +385,6 @@
           <NavigationProperty Name="Files" Relationship="BirthdayModel.FK_File_User" FromRole="User" ToRole="File" />
           <NavigationProperty Name="Birthdays" Relationship="BirthdayModel.FK_Birthday_User" FromRole="User" ToRole="Birthday" />
         </EntityType>
-        <Association Name="FK_BirthdayImage_File">
-          <End Type="BirthdayModel.File" Role="File" Multiplicity="1" />
-          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="File">
-              <PropertyRef Name="FileID" />
-            </Principal>
-            <Dependent Role="BirthdayImage">
-              <PropertyRef Name="FileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Congratulation_Congratulation">
           <End Type="BirthdayModel.CongratulationType" Role="CongratulationType" Multiplicity="1" />
           <End Type="BirthdayModel.Congratulation" Role="Congratulation" Multiplicity="*" />
@@ -422,8 +431,8 @@
           <NavigationProperty Name="Gender" Relationship="BirthdayModel.FK_Birthday_Gender" FromRole="Birthday" ToRole="Gender" />
           <NavigationProperty Name="Template" Relationship="BirthdayModel.FK_Birthday_Template" FromRole="Birthday" ToRole="Template" />
           <NavigationProperty Name="User" Relationship="BirthdayModel.FK_Birthday_User" FromRole="Birthday" ToRole="User" />
-          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="Birthday" ToRole="BirthdayImage" />
           <NavigationProperty Name="Congratulations" Relationship="BirthdayModel.FK_Congratulation_Birthday" FromRole="Birthday" ToRole="Congratulation" />
+          <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="Birthday" ToRole="BirthdayImage" />
         </EntityType>
         <Association Name="FK_Birthday_Gender">
           <End Type="BirthdayModel.Gender" Role="Gender" Multiplicity="0..1" />
@@ -461,18 +470,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BirthdayImage_Birthday">
-          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
-          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Birthday">
-              <PropertyRef Name="BirthdayID" />
-            </Principal>
-            <Dependent Role="BirthdayImage">
-              <PropertyRef Name="BirthdayID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Congratulation_Birthday">
           <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
           <End Type="BirthdayModel.Congratulation" Role="Congratulation" Multiplicity="*" />
@@ -485,25 +482,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TemplateImage">
+          <Key>
+            <PropertyRef Name="TemplateImageID" />
+          </Key>
+          <Property Type="Int32" Name="TemplateImageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TemplateID" Nullable="false" />
+          <Property Type="Int32" Name="ImageIndex" Nullable="false" />
+          <Property Type="Int32" Name="ImageLeft" Nullable="false" />
+          <Property Type="Int32" Name="ImageTop" Nullable="false" />
+          <Property Type="Int32" Name="ImageWidth" Nullable="false" />
+          <Property Type="Int32" Name="ImageHeight" Nullable="false" />
+          <NavigationProperty Name="Template" Relationship="BirthdayModel.FK_TemplateImage_Template" FromRole="TemplateImage" ToRole="Template" />
+        </EntityType>
+        <Association Name="FK_TemplateImage_Template">
+          <End Type="BirthdayModel.Template" Role="Template" Multiplicity="1" />
+          <End Type="BirthdayModel.TemplateImage" Role="TemplateImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="TemplateImage">
+              <PropertyRef Name="TemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BirthdayImage">
+          <Key>
+            <PropertyRef Name="BirthdayImageID" />
+          </Key>
+          <Property Type="Int32" Name="BirthdayImageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BirthdayID" Nullable="false" />
+          <Property Type="Int32" Name="FileID" />
+          <Property Type="Int32" Name="ImageIndex" Nullable="false" />
+          <Property Type="Int32" Name="ImageLeft" Nullable="false" />
+          <Property Type="Int32" Name="ImageTop" Nullable="false" />
+          <Property Type="Int32" Name="ImageWidth" Nullable="false" />
+          <NavigationProperty Name="Birthday" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="BirthdayImage" ToRole="Birthday" />
+          <NavigationProperty Name="File" Relationship="BirthdayModel.FK_BirthdayImage_File" FromRole="BirthdayImage" ToRole="File" />
+        </EntityType>
+        <Association Name="FK_BirthdayImage_Birthday">
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
+          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BirthdayImage_File">
+          <End Type="BirthdayModel.File" Role="File" Multiplicity="0..1" />
+          <End Type="BirthdayModel.BirthdayImage" Role="BirthdayImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="BirthdayImage">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BirthdayModelStoreContainer" CdmEntityContainer="BirthdayContext">
-          <EntitySetMapping Name="BirthdayImages">
-            <EntityTypeMapping TypeName="BirthdayModel.BirthdayImage">
-              <MappingFragment StoreEntitySet="BirthdayImage">
-                <ScalarProperty Name="ImageWidth" ColumnName="ImageWidth" />
-                <ScalarProperty Name="ImageTop" ColumnName="ImageTop" />
-                <ScalarProperty Name="ImageLeft" ColumnName="ImageLeft" />
-                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
-                <ScalarProperty Name="FileID" ColumnName="FileID" />
-                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
-                <ScalarProperty Name="BirthdayImageID" ColumnName="BirthdayImageID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Congratulations">
             <EntityTypeMapping TypeName="BirthdayModel.Congratulation">
               <MappingFragment StoreEntitySet="Congratulation">
@@ -588,6 +635,32 @@
                 <ScalarProperty Name="Html" ColumnName="Html" />
                 <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
                 <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateImages">
+            <EntityTypeMapping TypeName="BirthdayModel.TemplateImage">
+              <MappingFragment StoreEntitySet="TemplateImage">
+                <ScalarProperty Name="ImageHeight" ColumnName="ImageHeight" />
+                <ScalarProperty Name="ImageWidth" ColumnName="ImageWidth" />
+                <ScalarProperty Name="ImageTop" ColumnName="ImageTop" />
+                <ScalarProperty Name="ImageLeft" ColumnName="ImageLeft" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+                <ScalarProperty Name="TemplateImageID" ColumnName="TemplateImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BirthdayImages">
+            <EntityTypeMapping TypeName="BirthdayModel.BirthdayImage">
+              <MappingFragment StoreEntitySet="BirthdayImage">
+                <ScalarProperty Name="ImageWidth" ColumnName="ImageWidth" />
+                <ScalarProperty Name="ImageTop" ColumnName="ImageTop" />
+                <ScalarProperty Name="ImageLeft" ColumnName="ImageLeft" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+                <ScalarProperty Name="BirthdayImageID" ColumnName="BirthdayImageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

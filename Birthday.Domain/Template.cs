@@ -17,6 +17,7 @@ namespace Birthday.Domain
         public Template()
         {
             this.Birthdays = new HashSet<Birthday>();
+            this.TemplateImages = new HashSet<TemplateImage>();
         }
     
         public int TemplateID { get; set; }
@@ -28,5 +29,6 @@ namespace Birthday.Domain
         public bool IsActive { get; set; }
     
         public virtual ICollection<Birthday> Birthdays { get; set; }
+        public virtual ICollection<TemplateImage> TemplateImages { get; set; }
     }
 }

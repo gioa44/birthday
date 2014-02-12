@@ -330,9 +330,12 @@ function showError(errorText, errorTitle) {
 
 //Ajax call
 
-function ajaxCall(url, data, onSuccess, onError, overrideError) {
+function ajaxCall(url, data, onSuccess, onError, overrideError, type) {
+
+    type = type || "POST"
+
     $.ajax({
-        type: "POST",
+        type: type,
         url: url,
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",

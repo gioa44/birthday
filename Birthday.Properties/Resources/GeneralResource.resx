@@ -144,6 +144,9 @@
   <data name="ErrorOccured" xml:space="preserve">
     <value>Error occured, please reload the page</value>
   </data>
+  <data name="ImageDimensionsWarning" xml:space="preserve">
+    <value>Images with minimum of width: {0} and height: {1} are allowed for this frame</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>Required field</value>
   </data>
