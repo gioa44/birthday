@@ -79,6 +79,24 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Birthday Reservation.
+        /// </summary>
+        public static string BirthdayReservation {
+            get {
+                return ResourceManager.GetString("BirthdayReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have reserved day - {0:dd MMMM yyyy}:&lt;br/ &gt;mail: {1};&lt;br/ &gt;password: {2}..
+        /// </summary>
+        public static string BirthdayReservationMailBody {
+            get {
+                return ResourceManager.GetString("BirthdayReservationMailBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -106,7 +124,7 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Day &quot;{0:dd MMM}&quot; is successfully reserved.
+        ///   Looks up a localized string similar to Day &quot;{0:dd MMM}&quot; is successfully reserved, password was send to your email.
         /// </summary>
         public static string DaySuccessfullyReserved {
             get {

@@ -123,6 +123,12 @@
   <data name="AnniversaryHistory" xml:space="preserve">
     <value>წინა იუბილარები</value>
   </data>
+  <data name="BirthdayReservation" xml:space="preserve">
+    <value>დაბადების დღის დაჯავშნა</value>
+  </data>
+  <data name="BirthdayReservationMailBody" xml:space="preserve">
+    <value>თქვენ დაჯავშნეთ დღე - {0:dd MMMM yyyy}:&lt;br/ &gt;ფოსტა: {1};&lt;br/ &gt;პაროლი: {2}.</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>დახურვა</value>
   </data>
@@ -133,7 +139,7 @@
     <value>{0} - დაჯავშნა</value>
   </data>
   <data name="DaySuccessfullyReserved" xml:space="preserve">
-    <value>დღე "{0:dd MMM}" დაჯავშნულია წარმატებით</value>
+    <value>დღე "{0:dd MMM}" დაჯავშნულია წარმატებით, თქვენს ელ-ფოსტაზე გამოგზავნილია პაროლი</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ელ-ფოსტა</value>

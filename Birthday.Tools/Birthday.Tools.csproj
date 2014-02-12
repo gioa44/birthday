@@ -34,6 +34,7 @@
       <HintPath>..\packages\Magick.NET-x86.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="ImageTool.cs" />
+    <Compile Include="MailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

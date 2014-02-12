@@ -15,7 +15,7 @@ namespace Birthday.Domain.Services
         public BirthdayService(BirthdayContext context)
             : base(context) { }
 
-        public int ReserveBirthday(DateTime eventDate, string email)
+        public int ReserveBirthday(DateTime eventDate, string email, ref string password)
         {
             var now = DateTime.Now;
 
@@ -26,14 +26,14 @@ namespace Birthday.Domain.Services
                 Published = false
             };
 
-            var pwd = CodeGenerator.GetCode(Config.PasswordLength);
+            password = CodeGenerator.GetCode(Config.PasswordLength);
 
             var user = new User
             {
                 Email = email,
                 CreateDate = now,
                 ExpireDate = eventDate,
-                Password = pwd
+                Password = password
             };
 
             birthday.User = user;

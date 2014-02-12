@@ -122,6 +122,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\CustomActionFilter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -256,6 +257,10 @@
     <ProjectReference Include="..\Birthday.Properties\Birthday.Properties.csproj">
       <Project>{1d363abf-ebc8-4d5b-abb9-a3a36380aa04}</Project>
       <Name>Birthday.Properties</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Birthday.Tools\Birthday.Tools.csproj">
+      <Project>{6e4c018a-ad92-44e0-b376-1dcbcda114c4}</Project>
+      <Name>Birthday.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

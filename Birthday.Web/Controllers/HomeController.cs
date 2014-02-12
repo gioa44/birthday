@@ -10,6 +10,8 @@ using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 
+using Birthday.Tools;
+using Birthday.Web.ActionFilters;
 namespace Birthday.Web.Controllers
 {
     public class HomeController : BaseController
@@ -49,9 +51,11 @@ namespace Birthday.Web.Controllers
 
                         if (day != null && !day.Reserved)
                         {
-                            var id = _BirthdayService.ReserveBirthday(day.Date, info.Email);
+                            string pwd = null;
+                            var id = _BirthdayService.ReserveBirthday(day.Date, info.Email, ref pwd);
                             if (id > 0)
                             {
+                                MailSender.SendMail(info.Email, GeneralResource.BirthdayReservation, string.Format(GeneralResource.BirthdayReservationMailBody, day.Date, info.Email, pwd));
                                 return Json(new { Result = string.Format(GeneralResource.DaySuccessfullyReserved, day.Date) });
                             }
                         }
@@ -110,7 +114,7 @@ namespace Birthday.Web.Controllers
             return Json(new { Result = "Ok" });
         }
 
-        [HttpPost]
+        [HttpPost, CustomActionFilter]
         public ActionResult Visualization(VisualizationViewModel model)
         {
             using (var service = new BirthdayImageService())
@@ -195,9 +199,8 @@ namespace Birthday.Web.Controllers
                 .Where(x => x.EventDate >= date && x.EventDate <= endDate)
                 .Select(x => x.EventDate);
 
-            for (int i = 0; i < 7; i++)
+            for (; date <= endDate; date = date.AddDays(1))
             {
-                date = date.AddDays(i);
                 days.Add(new Day
                 {
                     Date = date,
