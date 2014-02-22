@@ -114,7 +114,7 @@ namespace Birthday.Web.Controllers
             return Json(new { Result = "Ok" });
         }
 
-        [HttpPost, CustomActionFilter]
+        [HttpPost, AccessActionFilter]
         public ActionResult Visualization(VisualizationViewModel model)
         {
             using (var service = new BirthdayImageService())
