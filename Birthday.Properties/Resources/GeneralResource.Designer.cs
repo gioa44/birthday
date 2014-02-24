@@ -169,6 +169,15 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required field.
         /// </summary>
         public static string Required {

@@ -153,6 +153,9 @@
   <data name="ImageDimensionsWarning" xml:space="preserve">
     <value>ამ ჩარჩოსთვის სურათის მინიმალური დაშვებული ზომაა - სიგრძე: {0} და სიმაღლე: {1}</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>შესვლა</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>აუცილებელი ველი</value>
   </data>

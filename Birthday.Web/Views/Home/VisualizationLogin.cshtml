@@ -1,0 +1,49 @@
+﻿@model Birthday.Web.Models.VisualizationLogin
+
+@{
+    ViewBag.Title = "VisualizationLogin";
+}
+<div id="vis-login">
+    <form class="x-form" method="post">
+        <table class="x-tbl-form">
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Email)
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.Email)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(x => x.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Password)
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.Password)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(x => x.Password)
+                </td>
+            </tr>
+        </table>
+        <input type="submit" class="x-button" value="@GeneralResource.Login" />
+    </form>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $.validator.setDefaults({
+                ignore: ""
+            });
+        });
+    </script>
+}

@@ -12,14 +12,13 @@ using System.Web.Mvc;
 
 using Birthday.Tools;
 using Birthday.Web.ActionFilters;
+using Birthday.Web.Helpers;
 namespace Birthday.Web.Controllers
 {
     public class HomeController : BaseController
     {
         private static object lockObject = new object();
         private BirthdayService _BirthdayService = new BirthdayService();
-        private int _BirthdayID = 9;
-        private int _UserID = 3;
 
         public ActionResult Index()
         {
@@ -73,9 +72,28 @@ namespace Birthday.Web.Controllers
             return JsonError();
         }
 
+        public ActionResult VisualizationLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult VisualizationLogin(VisualizationLogin model)
+        {
+            if (VisualizationLoginHelper.ValidateUser(model.Email, model.Password, Session))
+            {
+                SetVisualizationAccessCookie(model.Email, model.Password);
+
+                return RedirectToAction("Visualization");
+            }
+
+            return View();
+        }
+
+        [AccessActionFilter]
         public ActionResult Visualization()
         {
-            var birthday = _BirthdayService.Get(_BirthdayID);
+            var birthday = _BirthdayService.Get(BirthdayID);
 
             var model = new VisualizationViewModel { Html = birthday.Html };
 
@@ -88,7 +106,7 @@ namespace Birthday.Web.Controllers
             model.TemplateList = selectList;
             model.TemplateID = birthday.TemplateID;
 
-            _BirthdayService.GetBirthdayImages(_BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
+            _BirthdayService.GetBirthdayImages(BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
             {
                 Index = x.ImageIndex,
                 Left = x.ImageLeft,
@@ -99,12 +117,12 @@ namespace Birthday.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, AccessActionFilter]
         public ActionResult SetTemplate(int templateID)
         {
             try
             {
-                _BirthdayService.SetTemplate(_BirthdayID, templateID);
+                _BirthdayService.SetTemplate(BirthdayID, templateID);
             }
             catch (Exception)
             {
@@ -121,7 +139,7 @@ namespace Birthday.Web.Controllers
             {
                 foreach (var item in model.ImageProps)
                 {
-                    service.UpdateImageProps(_BirthdayID, item.Index, item.Left, item.Top, item.Width);
+                    service.UpdateImageProps(BirthdayID, item.Index, item.Left, item.Top, item.Width);
                 }
             }
 
@@ -147,7 +165,7 @@ namespace Birthday.Web.Controllers
         {
             using (var service = new BirthdayImageService())
             {
-                var image = service.GetImage(_BirthdayID, imageIndex);
+                var image = service.GetImage(BirthdayID, imageIndex);
 
                 if (image == null || image.File == null)
                 {
@@ -158,7 +176,7 @@ namespace Birthday.Web.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, AccessActionFilter]
         public JsonResult ImageUpload(int imageIndex)
         {
             try
@@ -173,7 +191,7 @@ namespace Birthday.Web.Controllers
                 {
                     string errorMessage = null;
 
-                    var uploaded = service.SaveImage(content, file.ContentType, _BirthdayID, imageIndex, _UserID, ref errorMessage);
+                    var uploaded = service.SaveImage(content, file.ContentType, BirthdayID, imageIndex, UserID, ref errorMessage);
                     if (uploaded)
                     {
                         return Json(new { Result = "Ok" });

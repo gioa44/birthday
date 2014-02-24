@@ -132,9 +132,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\JsonResultHelper.cs" />
+    <Compile Include="Helpers\VisualizationLoginHelper.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
+    <Compile Include="Models\VisualizationLogin.cs" />
     <Compile Include="Models\VisualizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -242,6 +245,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\_ReserveDays.cshtml" />
     <Content Include="Views\Shared\_ErrorMessage.cshtml" />
+    <Content Include="Views\Home\VisualizationLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Birthday.Domain.Services;
+using Birthday.Web.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,32 @@ namespace Birthday.Web.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var cookies = filterContext.HttpContext.Request.Cookies["User"];
+            try
+            {
+                string email = null;
+                string password = null;
+
+                var cookie = filterContext.HttpContext.Request.Cookies["_Vis"];
+                if (cookie != null)
+                {
+                    var val = cookie.Value.Split(new char[] { '|' });
+
+                    email = val[0];
+                    password = val[1];
+                }
+
+                if (email != null && password != null)
+                {
+                    if (VisualizationLoginHelper.ValidateUser(email, password, filterContext.HttpContext.Session))
+                    {
+                        base.OnActionExecuting(filterContext);
+                        return;
+                    }
+                }
+            }
+            catch { }
+
+            filterContext.Result = new RedirectResult("VisualizationLogin");
         }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)

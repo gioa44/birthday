@@ -13,8 +13,9 @@ namespace Birthday.Domain.Services
         {
             //Get TemplateID
             var templateID = new BirthdayService(_DbContext).GetTemplateID(birthdayID);
+            int? widthFix = null;
 
-            if (!new TemplateService(_DbContext).ValidateImage(templateID, imageIndex, data, ref errorMessage))
+            if (!new TemplateService(_DbContext).ValidateImage(templateID, imageIndex, data, ref widthFix, ref errorMessage))
             {
                 return false;
             }
@@ -49,6 +50,8 @@ namespace Birthday.Domain.Services
                 {
                     _DbContext.Files.Remove(image.File);
                 }
+
+                image.ImageWidth = widthFix ?? image.ImageWidth;
 
                 image.File = new File
                     {

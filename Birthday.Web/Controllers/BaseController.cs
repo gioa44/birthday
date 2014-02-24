@@ -1,5 +1,6 @@
 ﻿using Birthday.Properties;
 using Birthday.Properties.Resources;
+using Birthday.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,6 +15,36 @@ namespace Birthday.Web.Controllers
 {
     public class BaseController : Controller
     {
+        public int BirthdayID
+        {
+            get
+            {
+                var id = Session["BirthdayID"];
+
+                if (id != null)
+                {
+                    return (int)id;
+                }
+
+                return -1;
+            }
+        }
+
+        public int UserID
+        {
+            get
+            {
+                var id = Session["UserID"];
+
+                if (id != null)
+                {
+                    return (int)id;
+                }
+
+                return -1;
+            }
+        }
+
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             string lang = null;
@@ -260,8 +291,19 @@ namespace Birthday.Web.Controllers
 
         protected JsonResult JsonError(string message = null)
         {
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return Json(new { Message = message ?? GeneralResource.ErrorOccured });
+            return JsonResultHelper.JsonError(Response, message);
+        }
+
+        protected void SetVisualizationAccessCookie(string email, string password)
+        {
+            var val = email + "|" + password;
+
+            Response.SetCookie(
+                new HttpCookie("_Vis", val)
+                {
+                    Expires = DateTime.Today.AddYears(1)
+                }
+            );
         }
     }
 }

@@ -149,6 +149,7 @@ div#content
     cursor: pointer;
     text-align: center;
     display: inline-block;
+    border: 0;
 }
 
     .x-button:hover
@@ -378,3 +379,32 @@ ul.x-day-list
     background-color: rgba(100,100,100, 0.5);
     padding: 5px;
 }
+
+.table.x-tbl-form
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.x-tbl-form > tbody > tr:nth-child(even) > td
+{
+    height: 30px;
+}
+
+table.x-tbl-form > tbody > tr > td:first-child
+{
+    width: 100px;
+}
+
+#vis-login
+{
+    width: 500px;
+    margin: 0 auto;
+}
+
+    #vis-login .field-validation-error
+    {
+        /*text-align: left;*/
+        /*position: absolute;*/
+        /*width: 200px;*/
+    }

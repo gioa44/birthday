@@ -29,7 +29,7 @@ namespace Birthday.Domain.Services
             return _DbContext.TemplateImages.FirstOrDefault(x => x.TemplateID == templateID && x.ImageIndex == imageIndex);
         }
 
-        public bool ValidateImage(int templateID, int imageIndex, byte[] imageData, ref string errorMessage)
+        public bool ValidateImage(int templateID, int imageIndex, byte[] imageData, ref int? widthFix, ref string errorMessage)
         {
             var imageInfo = new ImageTool.ImageInfo(imageData);
 
@@ -40,6 +40,23 @@ namespace Birthday.Domain.Services
             {
                 errorMessage = string.Format(GeneralResource.ImageDimensionsWarning, templateImage.ImageWidth, templateImage.ImageHeight);
                 return false;
+            }
+            else
+            {
+                var originalHeight = imageInfo.Height;
+                var originalWidth = imageInfo.Width;
+                var targetHeight = templateImage.ImageHeight;
+                var targetWidth = templateImage.ImageWidth;
+
+                if (originalHeight < originalWidth)
+                {
+                    targetHeight = (int)Math.Ceiling(originalHeight * ((float)targetWidth / (float)originalWidth));
+
+                    if (targetHeight < templateImage.ImageHeight)
+                    {
+                        widthFix = (int)Math.Ceiling(originalWidth * ((float)targetHeight / (float)originalHeight)); ;
+                    }
+                }
             }
 
             return true;

@@ -85,6 +85,7 @@
     <Compile Include="Services\BirthdayImageService.cs" />
     <Compile Include="Services\BirthdayService.cs" />
     <Compile Include="Services\TemplateService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Template.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
