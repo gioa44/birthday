@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Configuration;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Birthday.Tools
@@ -29,7 +30,10 @@ namespace Birthday.Tools
             SmtpClient smtp = new SmtpClient();
             smtp.DeliveryFormat = SmtpDeliveryFormat.International;
 
-            smtp.Send(mail);
+            new Thread(x =>
+            {
+                smtp.SendAsync(mail, null);
+            }).Start();
         }
 
         private static SmtpSection GetMailConfigSection()
