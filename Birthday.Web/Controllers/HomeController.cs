@@ -191,10 +191,10 @@ namespace Birthday.Web.Controllers
                 {
                     string errorMessage = null;
 
-                    var uploaded = service.SaveImage(content, file.ContentType, BirthdayID, imageIndex, UserID, ref errorMessage);
-                    if (uploaded)
+                    var image = service.SaveImage(content, file.ContentType, BirthdayID, imageIndex, UserID, ref errorMessage);
+                    if (image != null)
                     {
-                        return Json(new { Result = "Ok" });
+                        return Json(new { image.ImageLeft, image.ImageTop, image.ImageWidth });
                     }
                     else
                     {

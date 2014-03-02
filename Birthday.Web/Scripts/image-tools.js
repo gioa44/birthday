@@ -1,7 +1,13 @@
 ﻿$(function () {
 
+    var ImgPropsLeft = "#ImageProps_{0}__Left";
+    var ImgPropsTop = "#ImageProps_{0}__Top";
+    var ImgPropsWidth = "#ImageProps_{0}__Width";
+
     var processingImageID = 0;
+
     $('.f-img').hide();
+
     initImageReposition($('.f-img'));
 
     $('.f-imgupload').click(function (e) {
@@ -24,7 +30,9 @@
 
             $img.attr('src', src);
 
-            getImgProps($img);
+            setImgProps($img, data.ImageLeft, data.ImageTop, data.ImageWidth);
+            setImgPropsToHidden($img);
+            setupDraggable($img);
 
             popup.hide();
         });
@@ -35,91 +43,110 @@
     $('#TemplateID').change(function () {
         var id = $(this).val() || 0;
 
-        if(id > 0)
-        {
+        if (id > 0) {
             ajaxCall('/home/SetTemplate', { TemplateID: id }, function () {
                 window.location.href = window.location.href;
             });
         }
     });
-});
 
-var ImgPropsLeft = "#ImageProps_{0}__Left";
-var ImgPropsTop = "#ImageProps_{0}__Top";
-var ImgPropsWidth = "#ImageProps_{0}__Width";
+    function initImageReposition($images) {
 
-function initImageReposition($images) {
-    var preventShrink = false;
+        $images.each(function (index, elem) {
+            var $img = $(elem);
+            var id = $img.data('id');
 
-    $images.each(function (index, elem) {
-        var $img = $(elem);
-        var id = $img.data('id');
+            var $span = $('<span>');
+            $span.addClass("f-imgupload x-btn-imgupload");
+            $span.data('img-id', id);
+            $span.text('Upl');
+            $img.after($span);
+        });
 
-        var $span = $('<span>');
-        $span.addClass("f-imgupload x-btn-imgupload");
-        $span.data('img-id', id);
-        $span.text('Upl');
-        $img.after($span);
-    });
+        $images.one('load', function () {
+            var $img = $(this);
 
-    $images.one('load', function () {
-        var $img = $(this);
+            var pos = $img.position();
 
-        var pos = $img.position();
+            initImgProps($img);
 
-        setImgProps($img);
+            setupDraggable($img);
+            console.log($img.data('id') + " loaded");
+            $img.show();
+        })
+        .each(function () {
+            if (this.complete) $(this).load();
+        })
+        .mousewheel(function (event) {
 
-        setupImageTool($img, false);
-        console.log($img.data('id') + " loaded");
-        $img.show();
-    })
-    .each(function () {
-        if (this.complete) $(this).load();
-    })
-    .mousewheel(function (event) {
+            event.preventDefault();
 
-        event.preventDefault();
+            var $img = $(this);
 
-        var $img = $(this);
+            //loghandle(event);
 
-        //loghandle(event);
+            var step = 20;
 
-        var step = 20;
+            if (event.deltaY < 0) {
+                if ($img.data("prevent-shrink") == true) {
+                    return;
+                }
 
-        if (event.deltaY < 0) {
-            if (preventShrink) {
-                return;
-            }
-
-            step = -step;
-        }
-        else {
-            preventShrink = false;
-        }
-
-        var width = $img.width();
-        var height = $img.height();
-
-        var newWidth = width + step;
-
-        if (step > 0 || $img.parent().offset().left + $img.parent().width() < $img.offset().left + newWidth) {
-
-            $img.css('width', newWidth);
-
-            if (step < 0 && $img.parent().offset().top + $img.parent().height() >= $img.offset().top + $img.height()) {
-                preventShrink = true;
-                newWidth = width;
-                $img.css('width', newWidth);
+                step = -step;
             }
             else {
-                setupImageTool($img);
+                $img.data("prevent-shrink", false);
             }
 
-            $(formatString(ImgPropsWidth, [$img.data('id')])).val(newWidth);
-        }
-    });
+            var width = $img.width();
+            var height = $img.height();
 
-    function setupImageTool($img, moveToCenter) {
+            var newWidth = width + step;
+
+            if (step > 0 || $img.parent().offset().left + $img.parent().width() < $img.offset().left + newWidth) {
+
+                $img.css('width', newWidth);
+
+                if (step < 0 && $img.parent().offset().top + $img.parent().height() >= $img.offset().top + $img.height()) {
+                    $img.data("prevent-shrink", true);
+                    newWidth = width;
+                    $img.css('width', newWidth);
+                }
+                else {
+                    setupDraggable($img);
+                }
+
+                $(formatString(ImgPropsWidth, [$img.data('id')])).val(newWidth);
+            }
+        });
+
+        var loghandle = function (event) {
+            var o = '', id = event.currentTarget.id;
+
+            o = '#' + id + ':';
+
+            if (event.delta > 0)
+                o += ' up (' + delta + ')';
+            else if (event.delta < 0)
+                o += ' down (' + delta + ')';
+
+            if (event.deltaY > 0)
+                o += ' north (' + event.deltaY + ')';
+            else if (event.deltaY < 0)
+                o += ' south (' + event.deltaY + ')';
+
+            if (event.deltaX > 0)
+                o += ' east (' + event.deltaX + ')';
+            else if (event.deltaX < 0)
+                o += ' west (' + event.deltaX + ')';
+
+            o += ' deltaFactor (' + event.deltaFactor + ')';
+
+            console.log(o);
+        };
+    }
+
+    function setupDraggable($img, moveToCenter) {
         var width = $img.width();
         var height = $img.height();
 
@@ -139,7 +166,7 @@ function initImageReposition($images) {
 
         $img.draggable({
             containment: [Math.floor(pOffset.left - x), Math.floor(pOffset.top - y), pOffset.left, pOffset.top], drag: function () {
-                preventShrink = false;
+                $img.data("prevent-shrink", false);
             },
             drag: function (event, ui) {
                 var id = $img.data('id');
@@ -150,48 +177,32 @@ function initImageReposition($images) {
         });
     }
 
-    var loghandle = function (event) {
-        var o = '', id = event.currentTarget.id;
+    function setImgProps($img, left, top, width) {
 
-        o = '#' + id + ':';
+        $img.css({
+            'left': left + 'px',
+            'top': top + 'px',
+            'width': width + 'px'
+        });
+    }
 
-        if (event.delta > 0)
-            o += ' up (' + delta + ')';
-        else if (event.delta < 0)
-            o += ' down (' + delta + ')';
+    function initImgProps($img) {
 
-        if (event.deltaY > 0)
-            o += ' north (' + event.deltaY + ')';
-        else if (event.deltaY < 0)
-            o += ' south (' + event.deltaY + ')';
+        var id = $img.data('id');
 
-        if (event.deltaX > 0)
-            o += ' east (' + event.deltaX + ')';
-        else if (event.deltaX < 0)
-            o += ' west (' + event.deltaX + ')';
+        setImgProps($img,
+            $(formatString(ImgPropsLeft, [id])).val(),
+            $(formatString(ImgPropsTop, [id])).val(),
+            $(formatString(ImgPropsWidth, [id])).val());
+    }
 
-        o += ' deltaFactor (' + event.deltaFactor + ')';
+    function setImgPropsToHidden($img) {
+        var id = $img.data('id');
+        var pos = $img.position();
+        var width = $img.width();
 
-        console.log(o);
-    };
-}
-
-function setImgProps($img) {
-    var id = $img.data('id');
-
-    $img.css({
-        'left': $(formatString(ImgPropsLeft, [id])).val() + 'px',
-        'top': $(formatString(ImgPropsTop, [id])).val() + 'px',
-        'width': $(formatString(ImgPropsWidth, [id])).val() + 'px'
-    });
-}
-
-function getImgProps($img) {
-    var id = $img.data('id');
-    var pos = $img.position();
-    var width = $img.width();
-
-    $(formatString(ImgPropsLeft, [id])).val(pos.left);
-    $(formatString(ImgPropsTop, [id])).val(pos.top);
-    $(formatString(ImgPropsWidth, [id])).val(width);
-}
+        $(formatString(ImgPropsLeft, [id])).val(pos.left);
+        $(formatString(ImgPropsTop, [id])).val(pos.top);
+        $(formatString(ImgPropsWidth, [id])).val(width);
+    }
+});

@@ -48,13 +48,16 @@ namespace Birthday.Domain.Services
                 var targetHeight = templateImage.ImageHeight;
                 var targetWidth = templateImage.ImageWidth;
 
-                if (originalHeight < originalWidth)
-                {
-                    targetHeight = (int)Math.Ceiling(originalHeight * ((float)targetWidth / (float)originalWidth));
+                var resultHeight = (int)Math.Ceiling(originalHeight * ((float)targetWidth / (float)originalWidth));
 
-                    if (targetHeight < templateImage.ImageHeight)
+                if (resultHeight < targetHeight)
+                {
+                    widthFix = (int)Math.Ceiling(targetWidth * ((float)targetHeight / (float)resultHeight));
+
+                    if (widthFix > originalWidth)
                     {
-                        widthFix = (int)Math.Ceiling(originalWidth * ((float)targetHeight / (float)originalHeight)); ;
+                        errorMessage = string.Format(GeneralResource.ImageDimensionsWarning, templateImage.ImageWidth, templateImage.ImageHeight);
+                        return false;
                     }
                 }
             }

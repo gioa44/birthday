@@ -5,18 +5,18 @@
 }
 @Html.DropDownListFor(x => x.TemplateID, Model.TemplateList, "Choose template")
 <div>
-    @if(Model.TemplateID.HasValue)
+    @if (Model.TemplateID.HasValue)
     {
         <form method="post">
             @Html.Raw(Model.Html)
 
             @for (var i = 0; i < Model.ImageProps.Count; i++)
-        {
+            {
                 @Html.HiddenFor(x => x.ImageProps[i].Index)
                 @Html.HiddenFor(x => x.ImageProps[i].Left)
                 @Html.HiddenFor(x => x.ImageProps[i].Top)
                 @Html.HiddenFor(x => x.ImageProps[i].Width)
-        }
+            }
             <input type="submit" value="@GeneralResource.Save" />
         </form>
     }

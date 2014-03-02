@@ -9,7 +9,7 @@ namespace Birthday.Domain.Services
 {
     public class BirthdayImageService : DomainServiceBase<BirthdayImage>
     {
-        public bool SaveImage(byte[] data, string mimeType, int birthdayID, int imageIndex, int userID, ref string errorMessage)
+        public BirthdayImage SaveImage(byte[] data, string mimeType, int birthdayID, int imageIndex, int userID, ref string errorMessage)
         {
             //Get TemplateID
             var templateID = new BirthdayService(_DbContext).GetTemplateID(birthdayID);
@@ -17,7 +17,7 @@ namespace Birthday.Domain.Services
 
             if (!new TemplateService(_DbContext).ValidateImage(templateID, imageIndex, data, ref widthFix, ref errorMessage))
             {
-                return false;
+                return null;
             }
 
             var image = GetAll().FirstOrDefault(x => x.BirthdayID == birthdayID && x.ImageIndex == imageIndex);
@@ -56,7 +56,7 @@ namespace Birthday.Domain.Services
                 image.File = new File
                     {
                         Name = string.Empty,
-                        Content = data,
+                        Content = ImageTool.AutoOrientImageFile(data),
                         ContentLength = data.Length,
                         CreateDate = DateTime.Now,
                         CreateUserID = userID,
@@ -66,7 +66,7 @@ namespace Birthday.Domain.Services
 
             SaveChanges();
 
-            return image.FileID > 0;
+            return image;
         }
 
         public BirthdayImage GetImage(int birthdayID, int imageIndex)

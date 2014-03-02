@@ -53,6 +53,36 @@ namespace Birthday.Tools
         {
             using (var original = new ImageMagick.MagickImage(imageFile))
             {
+                //switch (original.Orientation)
+                //{
+                //    case ImageMagick.OrientationType.BottomLeft:
+                //        original.Flip();
+                //        break;
+                //    case ImageMagick.OrientationType.BottomRight:
+                //        original.Rotate(180);
+                //        break;
+                //    case ImageMagick.OrientationType.LeftBotom:
+                //        original.Rotate(270);
+                //        break;
+                //    case ImageMagick.OrientationType.LeftTop:
+                //        original.Rotate(90);
+                //        original.Flop();
+                //        break;
+                //    case ImageMagick.OrientationType.RightBottom:
+                //        original.Rotate(270);
+                //        original.Flop();
+                //        break;
+                //    case ImageMagick.OrientationType.RightTop:
+                //        original.Rotate(90);
+                //        break;
+                //    case ImageMagick.OrientationType.TopLeft:
+                //        break;
+                //    case ImageMagick.OrientationType.TopRight:
+                //        original.Flop();
+                //        break;
+                //    default:
+                //        break;
+                //}
                 original.AutoOrient();
 
                 return original.ToByteArray();
