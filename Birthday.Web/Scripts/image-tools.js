@@ -28,13 +28,14 @@
             var $img = $('.f-img[data-id="' + processingImageID + '"]');
             var src = $img.attr('src');
 
-            $img.attr('src', src);
-
-            setImgProps($img, data.ImageLeft, data.ImageTop, data.ImageWidth);
-            setImgPropsToHidden($img);
-            setupDraggable($img);
+            $img.attr('src', src).one('load', function () {
+                setImgProps($img, data.ImageLeft, data.ImageTop, data.ImageWidth);
+                setImgPropsToHidden($img);
+                setupDraggable($img);
+            });
 
             popup.hide();
+            $uploadSection.find('input[type="file"]').val('');
         });
 
         popup.show();
@@ -65,8 +66,6 @@
 
         $images.one('load', function () {
             var $img = $(this);
-
-            var pos = $img.position();
 
             initImgProps($img);
 
