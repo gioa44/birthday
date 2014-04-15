@@ -129,11 +129,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VisualizationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\JsonResultHelper.cs" />
+    <Compile Include="Helpers\ModelHelper.cs" />
     <Compile Include="Helpers\VisualizationLoginHelper.cs" />
+    <Compile Include="Models\CurrentBirthday.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
@@ -146,6 +149,9 @@
     <Content Include="Content\images\close_hover.png" />
     <Content Include="Content\images\dot.png" />
     <Content Include="Content\images\load.gif" />
+    <Content Include="Content\templates\heart\style.css" />
+    <Content Include="Content\templates\main.css" />
+    <Content Include="Content\templates\heart\layer.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -220,6 +226,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\tmpl.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -240,12 +247,12 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Home\Rules.cshtml" />
     <Content Include="Views\Home\Reserve.cshtml" />
-    <Content Include="Views\Home\Visualization.cshtml" />
+    <Content Include="Views\Visualization\Visualization.cshtml" />
     <Content Include="Views\Home\AnniversaryHistory.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\_ReserveDays.cshtml" />
     <Content Include="Views\Shared\_ErrorMessage.cshtml" />
-    <Content Include="Views\Home\VisualizationLogin.cshtml" />
+    <Content Include="Views\Visualization\VisualizationLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -76,6 +76,18 @@ namespace Birthday.Domain.Services
             return image;
         }
 
+        public BirthdayImage GetCurrentImage(int imageIndex)
+        {
+            var today = DateTime.Today;
+
+            var image = GetAll().FirstOrDefault(x => 
+                x.Birthday.EventDate == today 
+                && x.Birthday.Published
+                && x.ImageIndex == imageIndex);
+
+            return image;
+        }
+
         public void UpdateImageProps(int birthdayID, int imageIndex, int left, int top, int width)
         {
             var image = GetAll().FirstOrDefault(x => x.BirthdayID == birthdayID && x.ImageIndex == imageIndex);

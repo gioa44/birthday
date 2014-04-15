@@ -135,6 +135,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="DayAnniversary" xml:space="preserve">
+    <value>Day Anniversary</value>
+  </data>
   <data name="DayReservation" xml:space="preserve">
     <value>{0} - Reservation</value>
   </data>

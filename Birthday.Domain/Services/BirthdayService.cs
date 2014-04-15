@@ -109,10 +109,18 @@ namespace Birthday.Domain.Services
 
         public List<BirthdayImage> GetBirthdayImages(int birthdayID)
         {
-            return GetAll()
-                .FirstOrDefault(x => x.BirthdayID == birthdayID)
-                .BirthdayImages
+            return _DbContext.BirthdayImages
+                .Where(x => x.BirthdayID == birthdayID)
                 .ToList();
+        }
+
+        public Birthday GetCurrentBirthday()
+        {
+            var today = DateTime.Today;
+
+            var birthday = _DbContext.Birthdays.FirstOrDefault(x => x.EventDate == today && x.Published);
+
+            return birthday;
         }
     }
 }

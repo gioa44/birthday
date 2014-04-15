@@ -1,3 +1,27 @@
-﻿@{
+﻿@model CurrentBirthday  
+@{
     ViewBag.Title = "Index";
+}
+@Html.Raw(Model.Html)
+
+@for (var i = 0; i < Model.ImageProps.Count; i++)
+{
+    @Html.HiddenFor(x => x.ImageProps[i].Index)
+    @Html.HiddenFor(x => x.ImageProps[i].Left)
+    @Html.HiddenFor(x => x.ImageProps[i].Top)
+    @Html.HiddenFor(x => x.ImageProps[i].Width)
+}
+
+@section styles
+{
+    @if(Model.TemplateName != null)
+    {
+        <link href="@Url.Content("~/Content/templates/main.css")" rel="stylesheet">
+        <link href="@Url.Content(string.Format("~/Content/templates/{0}/style.css", Model.TemplateName.ToLower()))" rel="stylesheet">
+    }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/tmplview")
 }

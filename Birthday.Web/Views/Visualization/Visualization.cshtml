@@ -34,6 +34,12 @@
     }
 </div>
 
+@section styles
+{
+    <link href="@Url.Content("~/Content/templates/main.css")" rel="stylesheet">
+    <link href="@Url.Content(string.Format("~/Content/templates/{0}/style.css", Model.TemplateName.ToLower()))" rel="stylesheet">
+}
+
 @section scripts
 {
     @Scripts.Render("~/bundles/imagetools")

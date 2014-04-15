@@ -115,6 +115,15 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day Anniversary.
+        /// </summary>
+        public static string DayAnniversary {
+            get {
+                return ResourceManager.GetString("DayAnniversary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} - Reservation.
         /// </summary>
         public static string DayReservation {

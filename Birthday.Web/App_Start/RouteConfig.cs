@@ -16,11 +16,33 @@ namespace Birthday.Web
             routes.IgnoreRoute("{resource}.ashx/{*pathinfo}");
 
             routes.MapRoute(
-                name: "ImageRoute",
+                name: "ImageRoute0",
+                url: "BirthdayImage/{imageIndex}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "GetBirthdayImage",
+                    imageid = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "ImageRoute1",
                 url: "{controller}/BirthdayImage/{imageIndex}",
                 defaults: new
                 {
                     controller = "Home",
+                    action = "GetBirthdayImage",
+                    imageid = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
+                name: "ImageRoute2",
+                url: "{controller}/BirthdayImage/{imageIndex}",
+                defaults: new
+                {
+                    controller = "Visualization",
                     action = "GetBirthdayImage",
                     imageid = UrlParameter.Optional
                 }

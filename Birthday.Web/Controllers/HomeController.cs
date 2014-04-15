@@ -22,7 +22,19 @@ namespace Birthday.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var birthday = _BirthdayService.GetCurrentBirthday();
+
+            var model = new CurrentBirthday();
+
+            if(birthday != null)
+            {
+                model.TemplateName = birthday.Template.Title;
+                model.Html = birthday.Html;
+            }
+
+            model.ImageProps = ModelHelper.GetImageProps(BirthdayID, _BirthdayService);
+
+            return View(model);
         }
 
         public ActionResult Rules()
@@ -72,80 +84,6 @@ namespace Birthday.Web.Controllers
             return JsonError();
         }
 
-        public ActionResult VisualizationLogin()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult VisualizationLogin(VisualizationLogin model)
-        {
-            if (VisualizationLoginHelper.ValidateUser(model.Email, model.Password, Session))
-            {
-                SetVisualizationAccessCookie(model.Email, model.Password);
-
-                return RedirectToAction("Visualization");
-            }
-
-            return View();
-        }
-
-        [AccessActionFilter]
-        public ActionResult Visualization()
-        {
-            var birthday = _BirthdayService.Get(BirthdayID);
-
-            var model = new VisualizationViewModel { Html = birthday.Html };
-
-            model.ImageProps = new List<ImageInfo>();
-
-            var templateList = new TemplateService(_BirthdayService).GetAll().ToList();
-
-            var selectList = new SelectList(templateList, "TemplateID", "Title");
-
-            model.TemplateList = selectList;
-            model.TemplateID = birthday.TemplateID;
-
-            _BirthdayService.GetBirthdayImages(BirthdayID).ForEach(x => model.ImageProps.Add(new ImageInfo
-            {
-                Index = x.ImageIndex,
-                Left = x.ImageLeft,
-                Top = x.ImageTop,
-                Width = x.ImageWidth
-            }));
-
-            return View(model);
-        }
-
-        [HttpPost, AccessActionFilter]
-        public ActionResult SetTemplate(int templateID)
-        {
-            try
-            {
-                _BirthdayService.SetTemplate(BirthdayID, templateID);
-            }
-            catch (Exception)
-            {
-                return JsonError();
-            }
-
-            return Json(new { Result = "Ok" });
-        }
-
-        [HttpPost, AccessActionFilter]
-        public ActionResult Visualization(VisualizationViewModel model)
-        {
-            using (var service = new BirthdayImageService())
-            {
-                foreach (var item in model.ImageProps)
-                {
-                    service.UpdateImageProps(BirthdayID, item.Index, item.Left, item.Top, item.Width);
-                }
-            }
-
-            return RedirectToAction("Visualization");
-        }
-
         public ActionResult AnniversaryHistory()
         {
             return View();
@@ -165,7 +103,7 @@ namespace Birthday.Web.Controllers
         {
             using (var service = new BirthdayImageService())
             {
-                var image = service.GetImage(BirthdayID, imageIndex);
+                var image = service.GetCurrentImage(imageIndex);
 
                 if (image == null || image.File == null)
                 {
@@ -174,37 +112,6 @@ namespace Birthday.Web.Controllers
 
                 return new ImageResult(new MemoryStream(image.File.Content), image.File.MimeType);
             }
-        }
-
-        [HttpPost, AccessActionFilter]
-        public JsonResult ImageUpload(int imageIndex)
-        {
-            try
-            {
-                var file = Request.Files[0];
-
-                var content = new byte[file.InputStream.Length];
-
-                file.InputStream.Read(content, 0, content.Length);
-
-                using (var service = new BirthdayImageService())
-                {
-                    string errorMessage = null;
-
-                    var image = service.SaveImage(content, file.ContentType, BirthdayID, imageIndex, UserID, ref errorMessage);
-                    if (image != null)
-                    {
-                        return Json(new { image.ImageLeft, image.ImageTop, image.ImageWidth });
-                    }
-                    else
-                    {
-                        return JsonError(errorMessage);
-                    }
-                }
-            }
-            catch { }
-
-            return JsonError();
         }
 
         private IEnumerable<Day> GetVacantDays()

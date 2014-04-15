@@ -31,6 +31,9 @@ namespace Birthday.Web
             bundles.Add(new ScriptBundle("~/bundles/imagetools").Include(
                         "~/Scripts/image-tools.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/tmplview").Include(
+                        "~/Scripts/tmpl.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

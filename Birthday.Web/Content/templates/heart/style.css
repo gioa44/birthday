@@ -1,0 +1,32 @@
+﻿.tmpl
+{
+    background-image: url('layer.png');
+}
+
+    .tmpl .img-0
+    {
+        left: 760px;
+        top: 3px;
+        width: 236px;
+        height: 236px;
+        border-radius: 120px;
+    }
+
+    .tmpl .img-1
+    {
+        left: 415px;
+        top: 303px;
+        width: 276px;
+        height: 207px;
+    }
+
+    .tmpl .txt-0
+    {
+        text-align: center;
+        top: 82px;
+        left: 42px;
+        height: 210px;
+        width: 300px;
+        color: #fff;
+        line-height: 34px;
+    }
