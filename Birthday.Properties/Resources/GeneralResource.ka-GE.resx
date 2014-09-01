@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AgreementIsRequiredForReservation" xml:space="preserve">
+    <value>დაჯავშნის განსახორციელებლად აუცილებელია თანხმობა</value>
+  </data>
   <data name="AlreadyReserved" xml:space="preserve">
-    <value>"{0:dd MMM}" უკვე დაჯავშნულია</value>
+    <value>"{0:dd MMMM}" უკვე დაჯავშნულია</value>
   </data>
   <data name="AnniversaryHistory" xml:space="preserve">
     <value>წინა იუბილარები</value>
@@ -142,7 +145,7 @@
     <value>{0} - დაჯავშნა</value>
   </data>
   <data name="DaySuccessfullyReserved" xml:space="preserve">
-    <value>დღე "{0:dd MMM}" დაჯავშნულია წარმატებით, თქვენს ელ-ფოსტაზე გამოგზავნილია პაროლი</value>
+    <value>დღე "{0:dd MMMM}" დაჯავშნულია წარმატებით, თქვენს ელ-ფოსტაზე გამოგზავნილია პაროლი</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ელ-ფოსტა</value>
@@ -153,8 +156,17 @@
   <data name="ErrorOccured" xml:space="preserve">
     <value>მოხდა შეცდომა, გთხოვთ გადატვირთოთ გვერდი</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>სახელი</value>
+  </data>
+  <data name="IAgreeToSites" xml:space="preserve">
+    <value>მე ვეთანხმები საიტის</value>
+  </data>
   <data name="ImageDimensionsWarning" xml:space="preserve">
     <value>ამ ჩარჩოსთვის სურათის მინიმალური დაშვებული ზომაა - სიგრძე: {0} და სიმაღლე: {1}</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>გვარი</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>შესვლა</value>
@@ -165,6 +177,9 @@
   <data name="Reserve" xml:space="preserve">
     <value>ჯავშანი</value>
   </data>
+  <data name="ReserveDay" xml:space="preserve">
+    <value>დაჯავშნე დღე</value>
+  </data>
   <data name="Rules" xml:space="preserve">
     <value>წესები</value>
   </data>
@@ -174,8 +189,14 @@
   <data name="ToReserve" xml:space="preserve">
     <value>დაჯავშნა</value>
   </data>
+  <data name="ToRulesAndConditions" xml:space="preserve">
+    <value>მოხმარების წესებს</value>
+  </data>
   <data name="Visualization" xml:space="preserve">
     <value>ვიზუალიზაცია</value>
+  </data>
+  <data name="YouChose" xml:space="preserve">
+    <value>თქვენ აირჩიეთ {0}</value>
   </data>
   <data name="YourEmail" xml:space="preserve">
     <value>თქვენი ელ-ფოსტა</value>

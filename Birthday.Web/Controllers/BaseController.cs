@@ -294,6 +294,11 @@ namespace Birthday.Web.Controllers
             return JsonResultHelper.JsonError(Response, message);
         }
 
+        protected ViewResult StatusView(string message)
+        {
+            return View("_StatusInfo", new Birthday.Web.Models.StatusInfo { Message = message });
+        }
+
         protected void SetVisualizationAccessCookie(string email, string password)
         {
             var val = email + "|" + password;

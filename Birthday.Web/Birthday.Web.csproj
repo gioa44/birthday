@@ -140,6 +140,7 @@
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
+    <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Models\VisualizationLogin.cs" />
     <Compile Include="Models\VisualizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,6 +149,8 @@
     <Content Include="Content\images\close.png" />
     <Content Include="Content\images\close_hover.png" />
     <Content Include="Content\images\dot.png" />
+    <Content Include="Content\images\gift_green.png" />
+    <Content Include="Content\images\gift_grey.png" />
     <Content Include="Content\images\load.gif" />
     <Content Include="Content\templates\heart\style.css" />
     <Content Include="Content\templates\main.css" />
@@ -253,6 +256,7 @@
     <Content Include="Views\Shared\_ReserveDays.cshtml" />
     <Content Include="Views\Shared\_ErrorMessage.cshtml" />
     <Content Include="Views\Visualization\VisualizationLogin.cshtml" />
+    <Content Include="Views\Shared\_StatusInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

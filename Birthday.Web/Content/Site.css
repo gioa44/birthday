@@ -1,5 +1,4 @@
-﻿html, body
-{
+﻿html, body {
     padding: 0;
     margin: 0;
     font-family: 'Segoe UI' Verdana;
@@ -8,73 +7,95 @@
     min-height: 410px;
 }
 
-*
-{
+* {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-a
-{
+a {
     text-decoration: none;
     color: #000;
 }
 
-.x-center
-{
+.x-center {
     text-align: center;
 }
 
-/* Styles for validation helpers
------------------------------------------------------------*/
-.x-form .field-validation-error
-{
-    color: #ff0000;
-    padding: 5px;
-    display: block;
-    text-align: right;
-}
-
-.field-validation-valid
-{
+.field-validation-valid {
     display: none;
 }
 
-.x-form .input-validation-error
-{
-    border: 1px solid #ff0000 !important;
-    background-color: #ffeeee !important;
-}
-
-.validation-summary-errors
-{
+.validation-summary-errors {
     font-weight: bold;
     color: #ff0000;
 }
 
-.validation-summary-valid
-{
+.validation-summary-valid {
     display: none;
 }
 
-.x-form input[type="text"],
-.x-form input[type="password"]
-{
-    border: 1px solid #888;
-    background-color: #eee;
-    height: 30px;
-    padding-left: 5px;
-    width: 250px;
+.x-form {
+    padding: 20px;
+    background-color: #fff;
+    font-size: 15px;
+    opacity: 0.8;
 }
 
-.x-form label
-{
-    padding-right: 10px;
-}
+    .x-form input[type="text"],
+    .x-form input[type="password"] {
+        border: 1px solid #d0d0d0;
+        height: 30px;
+        padding-left: 5px;
+        width: 250px;
+    }
 
-div.watermark
-{
+    .x-form input[type="button"],
+    .x-form input[type="submit"] {
+        font-size: 15px;
+    }
+
+    .x-form > ul {
+        list-style: none;
+        margin: 0 0 0 20px;
+        padding: 0;
+        display: inline-block;
+    }
+
+        .x-form > ul > li {
+            padding-bottom: 20px;
+        }
+
+            .x-form > ul > li > label {
+                width: 150px;
+                display: inline-block;
+                color: #60a917;
+                font-weight: bold;
+            }
+
+            .x-form > ul > li > input[type="checkbox"] + input[type="hidden"] + label {
+                width: auto;
+            }
+
+            .x-form > ul > li > span {
+                color: #60a917;
+                font-weight: bold;
+                display: inline-block;
+            }
+
+    .x-form .field-validation-error {
+        color: #ff0000;
+        padding: 5px;
+        display: block;
+        text-align: right;
+    }
+
+    .x-form .input-validation-error {
+        border: 1px solid #ff0000 !important;
+        background-color: #ffeeee !important;
+    }
+
+div.watermark {
     position: absolute;
     color: #C0C0C0;
     padding: 0;
@@ -82,22 +103,19 @@ div.watermark
     border: 0;
 }
 
-.x-loader
-{
+.x-loader {
     height: 80px;
     width: 80px;
     background-image: url(images/load.gif);
     background-repeat: no-repeat;
 }
 
-    .x-loader.fixed-center
-    {
+    .x-loader.fixed-center {
         margin: 10px auto;
         position: absolute;
     }
 
-div#nav-menu
-{
+div#nav-menu {
     height: 41px;
     font-size: 1.2em;
     width: 100%;
@@ -105,44 +123,38 @@ div#nav-menu
     bottom: 0;
 }
 
-ul.x-nav-menu
-{
+ul.x-nav-menu {
     list-style: none;
     margin: 0;
     padding: 0 0 0 5%;
-    background-color: #34495e;
+    background-color: #373739;
     width: 100%;
     height: 41px;
 }
 
-    ul.x-nav-menu > li
-    {
+    ul.x-nav-menu > li {
         float: left;
-        background-color: #34495e;
+        background-color: #373739;
         cursor: pointer;
         height: 41px;
     }
 
-        ul.x-nav-menu > li:hover
-        {
+        ul.x-nav-menu > li:hover {
             background-color: #415b76;
         }
 
-        ul.x-nav-menu > li > a
-        {
+        ul.x-nav-menu > li > a {
             display: inline-block;
             color: #fff;
             padding: 10px 20px;
         }
 
-div#content
-{
+div#content {
     padding: 20px 100px;
     position: relative;
 }
 
-.x-button
-{
+.x-button {
     background-color: #3498db;
     color: #fff;
     padding: 10px 20px;
@@ -152,89 +164,73 @@ div#content
     border: 0;
 }
 
-    .x-button:hover
-    {
+    .x-button:hover {
         background-color: #5dade2;
     }
 
-.x-clear
-{
+.x-clear {
     clear: both;
 }
 
-#reserve-schedule
-{
+#reserve-schedule {
     height: 100%;
     bottom: 0;
-    position: absolute;
     width: 100%;
     background-color: #333;
-    padding-top: 100px;
 }
 
-    #reserve-schedule > *
-    {
+    #reserve-schedule > * {
         margin: 0 auto;
     }
 
-ul.x-day-list
-{
+ul.x-day-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 770px;
+    width: 1024px;
     display: table;
 }
 
-    ul.x-day-list > li
-    {
-        padding: 5px;
+    ul.x-day-list > li {
+        padding: 2px;
         float: left;
     }
 
-        ul.x-day-list > li:hover
-        {
-            padding-bottom: 5px;
-        }
-
-        ul.x-day-list > li .btn-reserve
-        {
-            width: 70px;
-            margin: 0 15px;
-            padding-left: 0;
-            padding-right: 0;
-            position: absolute;
-            margin-top: -11px;
-        }
-
-.x-date-box
-{
-    width: 100px;
-    height: 100px;
-    border: 1px solid #60a917;
+.x-date-box {
+    width: 138px;
+    height: 138px;
+    border: 1px solid #f1f0f0;
     text-align: center;
-    padding-top: 16px;
-    background-color: #60a917;
+    padding-top: 65px;
+    background-color: #f1f0f0;
+    background-position: 60% 50%;
+    background-repeat: no-repeat;
+    background-image: url(images/gift_green.png);
     color: white;
     font-size: 1.5em;
+    cursor: pointer;
 }
 
     .x-date-box .day,
-    .x-date-box .month
-    {
+    .x-date-box .month {
         display: block;
         vertical-align: middle;
+        line-height: 1em;
     }
 
-    .x-date-box.reserved
-    {
-        background-color: #e51400;
-        border: 1px solid #e51400;
+    .x-date-box.reserved {
+        cursor: default;
+        background-image: url(images/gift_grey.png);
+        background-position: 70% 50%;
+    }
+
+    .x-date-box.active {
+        cursor: default;
+        background-image: url(images/gift_orange.png);
     }
 
 /* x-popup */
-.x-popup
-{
+.x-popup {
     z-index: 1001;
     position: fixed;
     background-color: #FFF;
@@ -245,8 +241,7 @@ ul.x-day-list
     outline: none;
 }
 
-    .x-popup > .title-bar
-    {
+    .x-popup > .title-bar {
         text-align: center;
         background-color: #373737;
         font-size: 15px;
@@ -259,13 +254,11 @@ ul.x-day-list
         cursor: move;
     }
 
-        .x-popup > .title-bar.no-title
-        {
+        .x-popup > .title-bar.no-title {
             padding: 0;
         }
 
-    .x-popup > .content
-    {
+    .x-popup > .content {
         padding: 10px;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -283,8 +276,7 @@ ul.x-day-list
             margin: 10px 0;
         }*/
 
-    .x-popup > .action-bar
-    {
+    .x-popup > .action-bar {
         bottom: 0;
         position: relative;
         width: 100%;
@@ -295,23 +287,19 @@ ul.x-day-list
         box-sizing: border-box;
     }
 
-        .x-popup > .action-bar > .x-button
-        {
+        .x-popup > .action-bar > .x-button {
             margin-right: 5px;
         }
 
-            .x-popup > .action-bar > .x-button:last-child
-            {
+            .x-popup > .action-bar > .x-button:last-child {
                 margin-right: 0;
             }
 
-        .x-popup > .action-bar:empty
-        {
+        .x-popup > .action-bar:empty {
             display: none;
         }
 
-    .x-popup .close-icon
-    {
+    .x-popup .close-icon {
         position: absolute;
         background-repeat: no-repeat;
         background-position: center;
@@ -324,13 +312,7 @@ ul.x-day-list
         height: 16px;
     }
 
-/*.x-popup .close-icon:hover
-        {
-            background: url('images/close_hover.png') no-repeat center;
-        }*/
-
-.x-overlay
-{
+.x-overlay {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -347,42 +329,71 @@ ul.x-day-list
 }
 /* ~x-popup */
 
-.x-error-window
-{
+.x-error-window {
     width: 500px;
 }
 
-    .x-error-window > .title-bar
-    {
+    .x-error-window > .title-bar {
         background-color: #ce2222;
         color: #fff;
     }
 
-.table.x-tbl-form
-{
+.table.x-tbl-form {
     width: 100%;
     border-collapse: collapse;
 }
 
-table.x-tbl-form > tbody > tr:nth-child(even) > td
-{
+table.x-tbl-form > tbody > tr:nth-child(even) > td {
     height: 30px;
 }
 
-table.x-tbl-form > tbody > tr > td:first-child
-{
+table.x-tbl-form > tbody > tr > td:first-child {
     width: 100px;
 }
 
-#vis-login
-{
+#vis-login {
     width: 500px;
     margin: 0 auto;
 }
 
-    #vis-login .field-validation-error
-    {
+    #vis-login .field-validation-error {
         /*text-align: left;*/
         /*position: absolute;*/
         /*width: 200px;*/
+    }
+
+.x-page-title {
+    background-color: #f0a30a;
+    text-align: center;
+    margin: 0;
+    padding: 0 0 7px 0;
+    color: #fff;
+}
+
+#reservation {
+    background-color: #ccc;
+}
+
+    #reservation .x-form {
+        margin-top: 50px;
+    }
+
+        #reservation .x-form .date-text {
+            font-size: 20px;
+        }
+
+        #reservation .x-form .cancel {
+            background-color: #00ccff;
+        }
+
+        #reservation .x-form .reserve {
+            background-color: #60a917;
+        }
+
+    #reservation .pnl-actions {
+        text-align: right;
+    }
+
+    #reservation form {
+        display: none;
     }

@@ -16,5 +16,15 @@ namespace Birthday.Web.Models
         [EmailAddress(ErrorMessage = "", ErrorMessageResourceName = "EmailNotValid", ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "Email", ResourceType = typeof(GeneralResource))]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "", ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(GeneralResource))]
+        [Display(Name = "FirstName", ResourceType = typeof(GeneralResource))]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "", ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(GeneralResource))]
+        [Display(Name = "LastName", ResourceType = typeof(GeneralResource))]
+        public string LastName { get; set; }
+
+        public bool Confirm { get; set; }
     }
 }

@@ -1,19 +1,44 @@
 ﻿@model Birthday.Web.Models.ReserveInfo
 @{
-    ViewBag.Title = "Reserve";
+    ViewBag.Title = GeneralResource.ReserveDay;
 }
-
-@{ Html.RenderAction("ReserveDays"); }
-
-<div id="reserve">
-    @using (Html.BeginForm("Reserve", "Home", FormMethod.Post, htmlAttributes: new { id = "reserve-form", @class = "x-form" }))
+<div id="reservation">
+    @{ Html.RenderAction("ReserveDays"); }
+    @using (Ajax.BeginForm("Reserve", "Home", ajaxOptions: new AjaxOptions() { UpdateTargetId = "reservation" }))
     {
-        @Html.TextBoxFor(x => x.Email, htmlAttributes: new { @class = "watermark", title = GeneralResource.YourEmail })
-        @Html.ValidationMessageFor(x => x.Email)
-        @Html.HiddenFor(x => x.Date)
+        <div class="x-form">
+            <ul>
+                <li>
+                    <span class="date-text"></span>
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Email)
+                    @Html.TextBoxFor(x => x.Email)
+                    @Html.ValidationMessageFor(x => x.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.FirstName)
+                    @Html.TextBoxFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.LastName)
+                    @Html.TextBoxFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </li>
+                <li>
+                    @Html.CheckBoxFor(x => x.Confirm)
+                    <label for="Confirm">@GeneralResource.IAgreeToSites <a href="#">@GeneralResource.ToRulesAndConditions</a></label>
+                </li>
+            </ul>
+            @Html.HiddenFor(x => x.Date)
+            <div class="pnl-actions">
+                <input type="button" value="Cancel" class="x-button cancel" />
+                <input type="submit" value="Reserve" class="x-button reserve" />
+            </div>
+        </div>
     }
 </div>
-
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
@@ -24,40 +49,28 @@
             });
 
             $('.f-reserve').click(function () {
-                var day = $(this).data('day');
-                var name = $(this).data('name');
-                var title = formatString('@GeneralResource.DayReservation', [name]);
+                var $t = $(this);
+                var day = $t.data('day');
+                var name = $t.data('name');
+                var title = formatString('@GeneralResource.YouChose', [name]);
 
                 $('#Date').val(day);
+                $('.date-text').text(title);
 
-                var p = new XPopup(true);
+                deselectDay();
+                $t.addClass('active');
 
-                p.setTitle(title);
-                p.setContent($('#reserve').show());
-                p.addActionButton("Reserve", function () {
-                    if ($('#reserve-form').valid()) {
-                        $('#reserve-form').submit();
-                    }
-                });
-
-                p.show();
-
-                registerAjaxForm($('#reserve-form'), function (data) {
-                    p.hide();
-
-                    var popup = new XPopup(true);
-                    popup.setTitle(title);
-                    popup.setContent(data.Result);
-
-                    popup.addActionButton('@GeneralResource.Close', function () {
-                        window.location.href = window.location.href
-                    });
-
-                    popup.show();
-                });
-
-                initWaterMarks();
+                $('form').show();
             });
+
+            $('form .x-button.cancel').click(function () {
+                deselectDay();
+                $('form').hide();
+            });
+
+            function deselectDay() {
+                $('.x-date-box').removeClass('active');
+            }
         });
     </script>
 }

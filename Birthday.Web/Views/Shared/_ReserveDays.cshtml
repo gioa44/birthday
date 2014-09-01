@@ -5,15 +5,12 @@
         @foreach (var item in Model)
         {
             <li>
-                <div class="x-date-box @(item.Reserved ? "reserved" : string.Empty)">
+                <div class="x-date-box @(!item.Reserved ? "f-reserve" : string.Empty) @(item.Reserved ? "reserved" : string.Empty)"
+                    data-day="@item.Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern)" 
+                    data-name="@item.Date.ToString("dd MMMM")">
                     <span class="day">@item.Date.Date.Day</span>
                     <span class="month">@item.Date.ToString("MMM", System.Globalization.CultureInfo.CurrentCulture)</span>
                 </div>
-                @if (!item.Reserved)
-                {
-                    <span class="x-button btn-reserve f-reserve" data-day="@item.Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern)" 
-                        data-name="@item.Date.ToString("dd MMM")">@GeneralResource.ToReserve</span>
-                }
             </li>
         }
     </ul>

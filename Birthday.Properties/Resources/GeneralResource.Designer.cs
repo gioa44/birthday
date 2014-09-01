@@ -61,7 +61,16 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;{0:dd MMM}&quot; is already reserved.
+        ///   Looks up a localized string similar to Agreement is required for reservation to proceed.
+        /// </summary>
+        public static string AgreementIsRequiredForReservation {
+            get {
+                return ResourceManager.GetString("AgreementIsRequiredForReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0:dd MMMM}&quot; is already reserved.
         /// </summary>
         public static string AlreadyReserved {
             get {
@@ -133,7 +142,7 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Day &quot;{0:dd MMM}&quot; is successfully reserved, password was send to your email.
+        ///   Looks up a localized string similar to Day &quot;{0:dd MMMM}&quot; is successfully reserved, password was send to your email.
         /// </summary>
         public static string DaySuccessfullyReserved {
             get {
@@ -169,11 +178,38 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I agree to site&apos;s.
+        /// </summary>
+        public static string IAgreeToSites {
+            get {
+                return ResourceManager.GetString("IAgreeToSites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Images with minimum of width: {0} and height: {1} are allowed for this frame.
         /// </summary>
         public static string ImageDimensionsWarning {
             get {
                 return ResourceManager.GetString("ImageDimensionsWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -205,6 +241,15 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reserve a day.
+        /// </summary>
+        public static string ReserveDay {
+            get {
+                return ResourceManager.GetString("ReserveDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rules.
         /// </summary>
         public static string Rules {
@@ -232,11 +277,29 @@ namespace Birthday.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to rules and conditions.
+        /// </summary>
+        public static string ToRulesAndConditions {
+            get {
+                return ResourceManager.GetString("ToRulesAndConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visualization.
         /// </summary>
         public static string Visualization {
             get {
                 return ResourceManager.GetString("Visualization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You chose {0}.
+        /// </summary>
+        public static string YouChose {
+            get {
+                return ResourceManager.GetString("YouChose", resourceCulture);
             }
         }
         

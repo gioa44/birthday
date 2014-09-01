@@ -26,7 +26,7 @@ namespace Birthday.Web.Controllers
 
             var model = new CurrentBirthday();
 
-            if(birthday != null)
+            if (birthday != null)
             {
                 model.TemplateName = birthday.Template.Title;
                 model.Html = birthday.Html;
@@ -54,6 +54,11 @@ namespace Birthday.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if(!info.Confirm)
+                    {
+                        return StatusView(GeneralResource.AgreementIsRequiredForReservation);
+                    }
+
                     lock (lockObject)
                     {
                         var vacantDays = GetVacantDays();
@@ -67,12 +72,13 @@ namespace Birthday.Web.Controllers
                             if (id > 0)
                             {
                                 MailSender.SendMail(info.Email, GeneralResource.BirthdayReservation, string.Format(GeneralResource.BirthdayReservationMailBody, day.Date, info.Email, pwd));
-                                return Json(new { Result = string.Format(GeneralResource.DaySuccessfullyReserved, day.Date) });
+
+                                return StatusView(string.Format(GeneralResource.DaySuccessfullyReserved, day.Date));
                             }
                         }
                         else
                         {
-                            return Json(new { Result = string.Format(GeneralResource.AlreadyReserved, day.Date) });
+                            return StatusView(string.Format(GeneralResource.AlreadyReserved, day.Date));
                         }
                     }
                 }
@@ -81,7 +87,8 @@ namespace Birthday.Web.Controllers
             {
 
             }
-            return JsonError();
+
+            return StatusView(GeneralResource.ErrorOccured);
         }
 
         public ActionResult AnniversaryHistory()
