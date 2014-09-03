@@ -35,6 +35,11 @@ a {
     display: none;
 }
 
+textarea {
+    font-family: 'Segoe UI' Verdana;
+    font-size: 13px;
+}
+
 .x-form {
     padding: 20px;
     background-color: #fff;

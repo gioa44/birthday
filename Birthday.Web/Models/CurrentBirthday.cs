@@ -10,5 +10,6 @@ namespace Birthday.Web.Models
         public string Html { get; set; }
         public string TemplateName { get; set; }
         public List<ImageInfo> ImageProps { get; set; }
+        public List<BirthdayText> Texts { get; set; }
     }
 }

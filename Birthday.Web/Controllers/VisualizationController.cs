@@ -46,9 +46,13 @@ namespace Birthday.Web.Controllers
 
             model.TemplateList = selectList;
             model.TemplateID = birthday.TemplateID;
-            model.TemplateName = birthday.Template.Title;
+            if (birthday.Template != null)
+            {
+                model.TemplateName = birthday.Template.Title;
+            }
 
-            model.ImageProps = ModelHelper.GetImageProps(BirthdayID, _BirthdayService);
+            model.ImageProps = ModelHelper.GetImageProps(birthday);
+            model.Texts = ModelHelper.GetBirthdayTexts(birthday);
 
             return View(model);
         }
@@ -77,6 +81,11 @@ namespace Birthday.Web.Controllers
                 {
                     service.UpdateImageProps(BirthdayID, item.Index, item.Left, item.Top, item.Width);
                 }
+            }
+
+            foreach (var item in model.Texts)
+            {
+                _BirthdayService.UpdateBirthdayText(BirthdayID, item.Index, item.Text);
             }
 
             return RedirectToAction("Visualization");

@@ -8,6 +8,7 @@
         <EntityContainer Name="BirthdayModelStoreContainer">
           <EntitySet Name="Birthday" EntityType="BirthdayModel.Store.Birthday" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BirthdayImage" EntityType="BirthdayModel.Store.BirthdayImage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BirthdayText" EntityType="BirthdayModel.Store.BirthdayText" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Congratulation" EntityType="BirthdayModel.Store.Congratulation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CongratulationType" EntityType="BirthdayModel.Store.CongratulationType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="File" EntityType="BirthdayModel.Store.File" store:Type="Tables" Schema="dbo" />
@@ -34,6 +35,10 @@
           <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.Store.FK_BirthdayImage_File">
             <End Role="File" EntitySet="File" />
             <End Role="BirthdayImage" EntitySet="BirthdayImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BirthdayText_Birthday" Association="BirthdayModel.Store.FK_BirthdayText_Birthday">
+            <End Role="Birthday" EntitySet="Birthday" />
+            <End Role="BirthdayText" EntitySet="BirthdayText" />
           </AssociationSet>
           <AssociationSet Name="FK_Congratulation_Birthday" Association="BirthdayModel.Store.FK_Congratulation_Birthday">
             <End Role="Birthday" EntitySet="Birthday" />
@@ -83,6 +88,15 @@
           <Property Name="ImageLeft" Type="int" Nullable="false" />
           <Property Name="ImageTop" Type="int" Nullable="false" />
           <Property Name="ImageWidth" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BirthdayText">
+          <Key>
+            <PropertyRef Name="BirthdayTextID" />
+          </Key>
+          <Property Name="BirthdayTextID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BirthdayID" Type="int" Nullable="false" />
+          <Property Name="TextIndex" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Congratulation">
           <Key>
@@ -216,6 +230,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BirthdayText_Birthday">
+          <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="1" />
+          <End Role="BirthdayText" Type="BirthdayModel.Store.BirthdayText" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="BirthdayText">
+              <PropertyRef Name="BirthdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Congratulation_Birthday">
           <End Role="Birthday" Type="BirthdayModel.Store.Birthday" Multiplicity="1" />
           <End Role="Congratulation" Type="BirthdayModel.Store.Congratulation" Multiplicity="*" />
@@ -313,6 +339,11 @@
           <AssociationSet Name="FK_BirthdayImage_File" Association="BirthdayModel.FK_BirthdayImage_File">
             <End Role="File" EntitySet="Files" />
             <End Role="BirthdayImage" EntitySet="BirthdayImages" />
+          </AssociationSet>
+          <EntitySet Name="BirthdayTexts" EntityType="BirthdayModel.BirthdayText" />
+          <AssociationSet Name="FK_BirthdayText_Birthday" Association="BirthdayModel.FK_BirthdayText_Birthday">
+            <End Role="Birthday" EntitySet="Birthdays" />
+            <End Role="BirthdayText" EntitySet="BirthdayTexts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Congratulation">
@@ -433,6 +464,7 @@
           <NavigationProperty Name="User" Relationship="BirthdayModel.FK_Birthday_User" FromRole="Birthday" ToRole="User" />
           <NavigationProperty Name="Congratulations" Relationship="BirthdayModel.FK_Congratulation_Birthday" FromRole="Birthday" ToRole="Congratulation" />
           <NavigationProperty Name="BirthdayImages" Relationship="BirthdayModel.FK_BirthdayImage_Birthday" FromRole="Birthday" ToRole="BirthdayImage" />
+          <NavigationProperty Name="BirthdayTexts" Relationship="BirthdayModel.FK_BirthdayText_Birthday" FromRole="Birthday" ToRole="BirthdayText" />
         </EntityType>
         <Association Name="FK_Birthday_Gender">
           <End Type="BirthdayModel.Gender" Role="Gender" Multiplicity="0..1" />
@@ -542,6 +574,28 @@
             </Principal>
             <Dependent Role="BirthdayImage">
               <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BirthdayText">
+          <Key>
+            <PropertyRef Name="BirthdayTextID" />
+          </Key>
+          <Property Type="Int32" Name="BirthdayTextID" Nullable="false" />
+          <Property Type="Int32" Name="BirthdayID" Nullable="false" />
+          <Property Type="Int32" Name="TextIndex" Nullable="false" />
+          <Property Type="String" Name="Text" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Birthday" Relationship="BirthdayModel.FK_BirthdayText_Birthday" FromRole="BirthdayText" ToRole="Birthday" />
+        </EntityType>
+        <Association Name="FK_BirthdayText_Birthday">
+          <End Type="BirthdayModel.Birthday" Role="Birthday" Multiplicity="1" />
+          <End Type="BirthdayModel.BirthdayText" Role="BirthdayText" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birthday">
+              <PropertyRef Name="BirthdayID" />
+            </Principal>
+            <Dependent Role="BirthdayText">
+              <PropertyRef Name="BirthdayID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -661,6 +715,16 @@
                 <ScalarProperty Name="FileID" ColumnName="FileID" />
                 <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
                 <ScalarProperty Name="BirthdayImageID" ColumnName="BirthdayImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BirthdayTexts">
+            <EntityTypeMapping TypeName="BirthdayModel.BirthdayText">
+              <MappingFragment StoreEntitySet="BirthdayText">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TextIndex" ColumnName="TextIndex" />
+                <ScalarProperty Name="BirthdayID" ColumnName="BirthdayID" />
+                <ScalarProperty Name="BirthdayTextID" ColumnName="BirthdayTextID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

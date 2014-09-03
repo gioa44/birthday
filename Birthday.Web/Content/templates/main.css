@@ -1,5 +1,4 @@
-﻿.tmpl
-{
+﻿.tmpl {
     height: 670px;
     width: 1000px;
     background-position: center;
@@ -8,18 +7,19 @@
     position: relative;
 }
 
-    .tmpl textarea
-    {
-        margin: 0;
-        position: absolute;
-        background: transparent;
-        border: 0;
-        resize: none;
+    .tmpl .txt {
+        position: relative;
+        display: inline-block;
+        white-space: pre;
+        background-color: transparent;
+        border: none;
         outline: none;
+        resize: none;
+        margin: 0;
+        padding: 0;
     }
 
-.x-img-wrapper
-{
+.x-img-wrapper {
     width: 200px;
     height: 200px;
     padding: 0;
@@ -29,13 +29,11 @@
     position: absolute;
 }
 
-    .x-img-wrapper img
-    {
+    .x-img-wrapper img {
         position: relative;
     }
 
-.x-btn-imgupload
-{
+.x-btn-imgupload {
     position: absolute;
     top: 50%;
     left: 50%;

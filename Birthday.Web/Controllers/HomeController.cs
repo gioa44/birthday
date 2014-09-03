@@ -32,7 +32,8 @@ namespace Birthday.Web.Controllers
                 model.Html = birthday.Html;
             }
 
-            model.ImageProps = ModelHelper.GetImageProps(BirthdayID, _BirthdayService);
+            model.ImageProps = ModelHelper.GetImageProps(birthday);
+            model.Texts = ModelHelper.GetBirthdayTexts(birthday);
 
             return View(model);
         }
@@ -68,7 +69,7 @@ namespace Birthday.Web.Controllers
                         if (day != null && !day.Reserved)
                         {
                             string pwd = null;
-                            var id = _BirthdayService.ReserveBirthday(day.Date, info.Email, ref pwd);
+                            var id = _BirthdayService.ReserveBirthday(day.Date, info.Email, info.FirstName, info.LastName, ref pwd);
                             if (id > 0)
                             {
                                 MailSender.SendMail(info.Email, GeneralResource.BirthdayReservation, string.Format(GeneralResource.BirthdayReservationMailBody, day.Date, info.Email, pwd));

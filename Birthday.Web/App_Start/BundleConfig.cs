@@ -29,6 +29,7 @@ namespace Birthday.Web
                         "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/imagetools").Include(
+                        "~/Scripts/tmpl.js",
                         "~/Scripts/image-tools.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/tmplview").Include(

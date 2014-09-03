@@ -52,6 +52,9 @@
     <Compile Include="BirthdayImage.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="BirthdayText.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Congratulation.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

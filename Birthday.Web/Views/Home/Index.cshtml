@@ -12,6 +12,12 @@
     @Html.HiddenFor(x => x.ImageProps[i].Width)
 }
 
+@for (var i = 0; i < Model.Texts.Count; i++)
+{
+    @Html.HiddenFor(x => x.Texts[i].Index)
+    @Html.HiddenFor(x => x.Texts[i].Text)
+}
+
 @section styles
 {
     @if(Model.TemplateName != null)

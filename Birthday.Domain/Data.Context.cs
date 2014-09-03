@@ -34,5 +34,6 @@ namespace Birthday.Domain
         public DbSet<Birthday> Birthdays { get; set; }
         public DbSet<TemplateImage> TemplateImages { get; set; }
         public DbSet<BirthdayImage> BirthdayImages { get; set; }
+        public DbSet<BirthdayText> BirthdayTexts { get; set; }
     }
 }

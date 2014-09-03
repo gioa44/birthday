@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="BirthdayModel.BirthdayImage" Width="1.5" PointX="6.1352601769078809" PointY="26.841560212355834" />
         <AssociationConnector Association="BirthdayModel.FK_BirthdayImage_Birthday" />
         <AssociationConnector Association="BirthdayModel.FK_BirthdayImage_File" />
+        <EntityTypeShape EntityType="BirthdayModel.BirthdayText" Width="1.5" PointX="4.4534488341088636" PointY="22.066188897037037" />
+        <AssociationConnector Association="BirthdayModel.FK_BirthdayText_Birthday" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

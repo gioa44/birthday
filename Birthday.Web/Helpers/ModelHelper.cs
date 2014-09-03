@@ -9,10 +9,10 @@ namespace Birthday.Web.Helpers
 {
     public static class ModelHelper
     {
-        public static List<ImageInfo> GetImageProps(int birthdayID, BirthdayService service)
+        public static List<ImageInfo> GetImageProps(Birthday.Domain.Birthday birthday)
         {
             var imageProps = new List<ImageInfo>();
-            var images = service.GetBirthdayImages(birthdayID);
+            var images = birthday.BirthdayImages.ToList();
 
             if (images.Any())
             {
@@ -26,6 +26,18 @@ namespace Birthday.Web.Helpers
             }
 
             return imageProps;
+        }
+
+        public static List<BirthdayText> GetBirthdayTexts(Birthday.Domain.Birthday birthday)
+        {
+            return birthday.BirthdayTexts
+                .Select(x => new BirthdayText
+                {
+                    Index = x.TextIndex,
+                    Text = x.Text
+                })
+                .OrderBy(x => x.Index)
+                .ToList();
         }
     }
 }

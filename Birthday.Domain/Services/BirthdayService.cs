@@ -15,7 +15,7 @@ namespace Birthday.Domain.Services
         public BirthdayService(BirthdayContext context)
             : base(context) { }
 
-        public int ReserveBirthday(DateTime eventDate, string email, ref string password)
+        public int ReserveBirthday(DateTime eventDate, string email, string firstName, string lastName, ref string password)
         {
             var now = DateTime.Now;
 
@@ -31,6 +31,8 @@ namespace Birthday.Domain.Services
             var user = new User
             {
                 Email = email,
+                FirstName = firstName,
+                LastName = lastName,
                 CreateDate = now,
                 ExpireDate = eventDate,
                 Password = password
@@ -100,6 +102,20 @@ namespace Birthday.Domain.Services
                 });
             }
 
+            foreach (var item in birthday.BirthdayTexts.ToList())
+            {
+                _DbContext.Entry(item).State = System.Data.EntityState.Deleted;
+                birthday.BirthdayTexts.Remove(item);
+            }
+
+            for (int i = 0; i < template.TextCount; i++)
+            {
+                birthday.BirthdayTexts.Add(new BirthdayText
+                {
+                    TextIndex = i
+                });
+            }
+
             Update(birthday);
 
             SaveChanges();
@@ -121,6 +137,23 @@ namespace Birthday.Domain.Services
             var birthday = _DbContext.Birthdays.FirstOrDefault(x => x.EventDate == today && x.Published);
 
             return birthday;
+        }
+
+        public void UpdateBirthdayText(int birthdayID, int index, string text)
+        {
+            var birthday = this.Get(birthdayID);
+
+            var birthdayText = birthday.BirthdayTexts
+                .FirstOrDefault(x => x.TextIndex == index);
+
+            if (birthdayText != null)
+            {
+                birthdayText.Text = text;
+
+                this.Update(birthday);
+
+                this.SaveChanges();
+            }
         }
     }
 }

@@ -141,6 +141,7 @@
     <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
     <Compile Include="Models\StatusInfo.cs" />
+    <Compile Include="Models\BirthdayText.cs" />
     <Compile Include="Models\VisualizationLogin.cs" />
     <Compile Include="Models\VisualizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
