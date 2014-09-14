@@ -1,6 +1,7 @@
 ﻿@model Birthday.Web.Models.ReserveInfo
 @{
     ViewBag.Title = GeneralResource.ReserveDay;
+    ViewBag.TitleCss = "reserve";
 }
 <div id="reservation">
     @{ Html.RenderAction("ReserveDays"); }
@@ -9,7 +10,7 @@
         <div class="x-form">
             <ul>
                 <li>
-                    <span class="date-text"></span>
+                    <span class="date-text text"></span>
                 </li>
                 <li>
                     @Html.LabelFor(x => x.Email)

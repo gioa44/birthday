@@ -24,6 +24,11 @@ namespace Birthday.Web.Controllers
         {
             var birthday = _BirthdayService.GetCurrentBirthday();
 
+            if (birthday == null)
+            {
+                return RedirectToAction("Reserve");
+            }
+
             var model = new CurrentBirthday();
 
             if (birthday != null)
@@ -55,7 +60,7 @@ namespace Birthday.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(!info.Confirm)
+                    if (!info.Confirm)
                     {
                         return StatusView(GeneralResource.AgreementIsRequiredForReservation);
                     }
@@ -99,7 +104,31 @@ namespace Birthday.Web.Controllers
 
         public ActionResult Contact()
         {
-            return View();
+            return View(new ContactViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    MailSender.SendLocalMail(string.Format("{0}, {1}: {2}", model.Email, model.FullName, model.Title), model.Message);
+
+                    return StatusView(GeneralResource.MessageSent);
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch
+            {
+
+            }
+
+            return StatusView(GeneralResource.ErrorOccured);
         }
 
         public PartialViewResult ReserveDays()
@@ -120,6 +149,16 @@ namespace Birthday.Web.Controllers
 
                 return new ImageResult(new MemoryStream(image.File.Content), image.File.MimeType);
             }
+        }
+
+        [HttpGet]
+        public ActionResult Navigation()
+        {
+            var rd = ControllerContext.ParentActionViewContext.RouteData;
+            var currentAction = rd.GetRequiredString("action");
+            var currentController = rd.GetRequiredString("controller");
+
+            return PartialView(new Navigation(currentAction, currentController));
         }
 
         private IEnumerable<Day> GetVacantDays()

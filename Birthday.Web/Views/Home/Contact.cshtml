@@ -1,5 +1,52 @@
-﻿@{
+﻿@model ContactViewModel
+@{
     ViewBag.Title = "Contact";
+    ViewBag.TitleCss = "contact";
 }
-
-<h2>Contact</h2>
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "contact" }))
+{
+    <div id="contact" class="x-form">
+        <ul>
+            <li>
+                @Html.LabelFor(x => x.FullName)
+                @Html.TextBoxFor(x => x.FullName)
+                @Html.ValidationMessageFor(x => x.FullName)
+            </li>
+            <li>
+                @Html.LabelFor(x => x.Email)
+                @Html.TextBoxFor(x => x.Email)
+                @Html.ValidationMessageFor(x => x.Email)
+            </li>
+            <li>
+                @Html.LabelFor(x => x.Title)
+                @Html.TextBoxFor(x => x.Title)
+                @Html.ValidationMessageFor(x => x.Title)
+            </li>
+            <li>
+                @Html.LabelFor(x => x.Message)
+                @Html.TextAreaFor(x => x.Message)
+                @Html.ValidationMessageFor(x => x.Message)
+            </li>
+            <li class="pnl-actions">
+                <input type="submit" value="Send" class="x-button" />
+            </li>
+        </ul>
+        <ul class="info">
+            <li>
+                <label>მისამართი:</label>
+                <span class="text">დიღმის მასივი, მე-2 კვარტალი...</span>
+            </li>
+            <li>
+                <label>ტელეფონის ნომერი:</label>
+                <span class="text">+995 32 211 11 11</span>
+            </li>
+            <li>
+                <label>ელ-ფოსტა:</label>
+                <span class="text">birthday@birthday.com</span>
+            </li>
+        </ul>
+    </div>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

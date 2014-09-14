@@ -136,9 +136,11 @@
     <Compile Include="Helpers\JsonResultHelper.cs" />
     <Compile Include="Helpers\ModelHelper.cs" />
     <Compile Include="Helpers\VisualizationLoginHelper.cs" />
+    <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\CurrentBirthday.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\ImageInfo.cs" />
+    <Compile Include="Models\Navigation.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Models\BirthdayText.cs" />
@@ -248,7 +250,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Home\Rules.cshtml" />
     <Content Include="Views\Home\Reserve.cshtml" />
     <Content Include="Views\Visualization\Visualization.cshtml" />

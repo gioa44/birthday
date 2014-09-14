@@ -13,15 +13,23 @@ namespace Birthday.Tools
 {
     public static class MailSender
     {
+        private static SmtpSection _MailConfig = GetMailConfigSection();
+
+        public static void SendLocalMail(string subject, string body)
+        {
+            SendMail(_MailConfig.From, subject, body);
+        }
+
         public static void SendMail(string mailTo, string subject, string body)
         {
-            var mailConfig = GetMailConfigSection();
+            if (string.IsNullOrEmpty(mailTo))
+            {
+                return;
+            }
 
-            MailAddress to = new MailAddress(mailTo);
+            MailMessage mail = new MailMessage();
 
-            MailAddress from = new MailAddress(mailConfig.From);
-
-            MailMessage mail = new MailMessage(from, to);
+            mail.To.Add(new MailAddress(mailTo));
 
             mail.Subject = subject;
             mail.Body = body;

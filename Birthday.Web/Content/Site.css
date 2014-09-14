@@ -3,7 +3,7 @@
     margin: 0;
     font-family: 'Segoe UI' Verdana;
     font-size: 13px;
-    min-width: 410px;
+    min-width: 1100px;
     min-height: 410px;
 }
 
@@ -55,6 +55,13 @@ textarea {
         width: 250px;
     }
 
+    .x-form textarea {
+        border: 1px solid #d0d0d0;
+        height: 120px;
+        padding-left: 5px;
+        width: 300px;
+    }
+
     .x-form input[type="button"],
     .x-form input[type="submit"] {
         font-size: 15px;
@@ -71,22 +78,25 @@ textarea {
             padding-bottom: 20px;
         }
 
-            .x-form > ul > li > label {
-                width: 150px;
+            .x-form > ul > li > label,
+            .x-form > ul > li > .text {
                 display: inline-block;
                 color: #60a917;
-                font-weight: bold;
+                vertical-align: top;
+                /*font-weight: bold;*/
+            }
+
+            .x-form > ul > li > label {
+                width: 150px;
             }
 
             .x-form > ul > li > input[type="checkbox"] + input[type="hidden"] + label {
                 width: auto;
             }
 
-            .x-form > ul > li > span {
-                color: #60a917;
-                font-weight: bold;
-                display: inline-block;
-            }
+    .x-form .pnl-actions {
+        text-align: right;
+    }
 
     .x-form .field-validation-error {
         color: #ff0000;
@@ -131,10 +141,13 @@ div#nav-menu {
 ul.x-nav-menu {
     list-style: none;
     margin: 0;
-    padding: 0 0 0 5%;
+    padding: 0;
     background-color: #373739;
     width: 100%;
     height: 41px;
+    min-width: 1100px;
+    text-align: center;
+    display: table;
 }
 
     ul.x-nav-menu > li {
@@ -142,17 +155,60 @@ ul.x-nav-menu {
         background-color: #373739;
         cursor: pointer;
         height: 41px;
+        width: 16.666%;
+        border-top: 5px solid #373739;
+        white-space: nowrap;
+        text-align: center;
     }
 
-        ul.x-nav-menu > li:hover {
-            background-color: #415b76;
+        ul.x-nav-menu > li.n-0 {
+            border-top-color: #fff;
+        }
+
+        ul.x-nav-menu > li.n-1 {
+            border-top-color: #9a1616;
+        }
+
+        ul.x-nav-menu > li.n-2 {
+            border-top-color: #f0a30a;
+        }
+
+        ul.x-nav-menu > li.n-3 {
+            border-top-color: #63ab1a;
+        }
+
+        ul.x-nav-menu > li.n-4 {
+            border-top-color: #00ccff;
+        }
+
+        ul.x-nav-menu > li.n-5 {
+            border-top-color: #dc4fad;
+        }
+
+        ul.x-nav-menu > li:hover,
+        ul.x-nav-menu > li.active {
+            background-color: #282629;
         }
 
         ul.x-nav-menu > li > a {
             display: inline-block;
             color: #fff;
-            padding: 10px 20px;
+            height: 41px;
+            width: 100%;
+            padding-top: 6px;
         }
+
+.x-page-title {
+    background-color: #f0a30a;
+    text-align: center;
+    margin: 0;
+    padding: 0 0 7px 0;
+    color: #fff;
+}
+
+    .x-page-title.contact {
+        background-color: #dc4fad;
+    }
 
 div#content {
     padding: 20px 100px;
@@ -160,18 +216,27 @@ div#content {
 }
 
 .x-button {
-    background-color: #3498db;
+    background-color: #60a917;
     color: #fff;
     padding: 10px 20px;
     cursor: pointer;
     text-align: center;
     display: inline-block;
     border: 0;
+    margin: 0;
 }
 
     .x-button:hover {
-        background-color: #5dade2;
+        background-color: #71c41d;
     }
+
+    .x-button.cancel {
+        background-color: #00ccff;
+    }
+
+        .x-button.cancel:hover {
+            background-color: #30d6ff;
+        }
 
 .x-clear {
     clear: both;
@@ -367,14 +432,6 @@ table.x-tbl-form > tbody > tr > td:first-child {
         /*width: 200px;*/
     }
 
-.x-page-title {
-    background-color: #f0a30a;
-    text-align: center;
-    margin: 0;
-    padding: 0 0 7px 0;
-    color: #fff;
-}
-
 #reservation {
     background-color: #ccc;
 }
@@ -387,18 +444,40 @@ table.x-tbl-form > tbody > tr > td:first-child {
             font-size: 20px;
         }
 
-        #reservation .x-form .cancel {
-            background-color: #00ccff;
-        }
-
-        #reservation .x-form .reserve {
-            background-color: #60a917;
-        }
-
-    #reservation .pnl-actions {
-        text-align: right;
-    }
-
     #reservation form {
         display: none;
     }
+
+#contact.x-form {
+    width: 650px;
+    margin: 20px auto;
+}
+
+    #contact.x-form input[type="text"] {
+        width: 215px;
+    }
+
+    #contact.x-form textarea {
+        width: 280px;
+    }
+
+    #contact.x-form label {
+        display: table;
+        width: auto;
+        margin-bottom: 5px;
+    }
+
+    #contact.x-form > .info {
+        vertical-align: top;
+        width: 250px;
+        float: right;
+    }
+
+        #contact.x-form > .info label {
+            color: #dd5aae;
+            width: auto;
+        }
+
+        #contact.x-form > .info .text {
+            color: #888887;
+        }

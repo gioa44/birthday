@@ -9,10 +9,10 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <h1 class="x-page-title">@ViewBag.Title</h1>
+    <h1 class="x-page-title @ViewBag.TitleCss">@ViewBag.Title</h1>
     @RenderBody()
 
-    @{ Html.RenderPartial("_Navigation"); }
+    @{ Html.RenderAction("Navigation", "Home"); }
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")

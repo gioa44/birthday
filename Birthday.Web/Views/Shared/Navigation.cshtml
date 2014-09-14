@@ -1,0 +1,11 @@
+﻿@model Navigation
+<div id="nav-menu">
+    <ul class="x-nav-menu">
+        @foreach (var item in Model.Items)
+        {
+            <li class="n-@Model.Items.IndexOf(item) @Html.Raw(item.Active ? "active" : string.Empty)">@Html.ActionLink(item.Name, item.Action, item.Controller)</li>
+        }
+@*        <li style="float: right;">@Html.RouteLink("Geo", new { lang = "ka-GE" }) / @Html.RouteLink("Eng", new { lang = "en-US" })
+        </li>*@
+    </ul>
+</div>
