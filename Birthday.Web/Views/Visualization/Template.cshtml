@@ -1,0 +1,23 @@
+﻿@model TemplateSelect
+@{
+    ViewBag.Title = "Template";
+    Layout = "~/Views/Shared/_VisualizationLayout.cshtml";
+    ViewBag.CurrentStep = VisualizationSteps.Template;
+}
+@using (Html.BeginForm())
+{
+    <div class="x-form">
+        <ul>
+            <li>
+                @Html.LabelFor(x => x.TemplateID)
+                @Html.DropDownListFor(x => x.TemplateID, Model.TemplateList, "Choose template")
+                @Html.ValidationMessageFor(x => x.TemplateID)
+            </li>
+        </ul>
+        <div class="pnl-actions">
+            <a href="@Url.Action("PersonInfo")" class="x-button cancel">Previous</a>
+            <input type="submit" value="Next" class="x-button" />
+        </div>
+    </div>
+
+}

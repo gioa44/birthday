@@ -133,17 +133,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Helpers\JsonResultHelper.cs" />
     <Compile Include="Helpers\ModelHelper.cs" />
     <Compile Include="Helpers\VisualizationLoginHelper.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\CurrentBirthday.cs" />
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ImageInfo.cs" />
     <Compile Include="Models\Navigation.cs" />
+    <Compile Include="Models\PersonInfo.cs" />
     <Compile Include="Models\ReserveInfo.cs" />
     <Compile Include="Models\StatusInfo.cs" />
     <Compile Include="Models\BirthdayText.cs" />
+    <Compile Include="Models\TemplateSelect.cs" />
     <Compile Include="Models\VisualizationLogin.cs" />
     <Compile Include="Models\VisualizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -155,6 +159,9 @@
     <Content Include="Content\images\gift_green.png" />
     <Content Include="Content\images\gift_grey.png" />
     <Content Include="Content\images\load.gif" />
+    <Content Include="Content\images\wiz_arrow.png" />
+    <Content Include="Content\images\wiz_arrow_back.png" />
+    <Content Include="Content\images\wiz_arrow_inactive.png" />
     <Content Include="Content\templates\heart\style.css" />
     <Content Include="Content\templates\main.css" />
     <Content Include="Content\templates\heart\layer.png" />
@@ -253,13 +260,17 @@
     <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Home\Rules.cshtml" />
     <Content Include="Views\Home\Reserve.cshtml" />
-    <Content Include="Views\Visualization\Visualization.cshtml" />
+    <Content Include="Views\Visualization\TemplateFill.cshtml" />
     <Content Include="Views\Home\AnniversaryHistory.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\_ReserveDays.cshtml" />
     <Content Include="Views\Shared\_ErrorMessage.cshtml" />
     <Content Include="Views\Visualization\VisualizationLogin.cshtml" />
     <Content Include="Views\Shared\_StatusInfo.cshtml" />
+    <Content Include="Views\Visualization\PersonInfo.cshtml" />
+    <Content Include="Views\Shared\_VisualizationLayout.cshtml" />
+    <Content Include="Views\Visualization\Template.cshtml" />
+    <Content Include="Views\Visualization\Complete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,6 +78,11 @@ namespace Birthday.Domain.Services
 
             var birthday = Get(birthdayID);
 
+            if (birthday.TemplateID == templateID)
+            {
+                return false;
+            }
+
             birthday.TemplateID = templateID;
             birthday.Html = template.Html;
 

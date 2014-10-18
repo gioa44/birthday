@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="File.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

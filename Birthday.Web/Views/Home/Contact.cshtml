@@ -6,7 +6,7 @@
 @using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "contact" }))
 {
     <div id="contact" class="x-form">
-        <ul>
+        <ul class="msg-entry">
             <li>
                 @Html.LabelFor(x => x.FullName)
                 @Html.TextBoxFor(x => x.FullName)
@@ -22,7 +22,7 @@
                 @Html.TextBoxFor(x => x.Title)
                 @Html.ValidationMessageFor(x => x.Title)
             </li>
-            <li>
+            <li class="message">
                 @Html.LabelFor(x => x.Message)
                 @Html.TextAreaFor(x => x.Message)
                 @Html.ValidationMessageFor(x => x.Message)

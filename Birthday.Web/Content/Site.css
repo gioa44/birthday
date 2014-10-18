@@ -1,10 +1,14 @@
 ﻿html, body {
-    padding: 0;
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI' Verdana;
     font-size: 13px;
     min-width: 1100px;
     min-height: 410px;
+}
+
+html {
+    padding-bottom: 41px;
 }
 
 * {
@@ -48,7 +52,8 @@ textarea {
 }
 
     .x-form input[type="text"],
-    .x-form input[type="password"] {
+    .x-form input[type="password"],
+    select {
         border: 1px solid #d0d0d0;
         height: 30px;
         padding-left: 5px;
@@ -69,13 +74,15 @@ textarea {
 
     .x-form > ul {
         list-style: none;
-        margin: 0 0 0 20px;
+        margin: 0 0 0 44px;
         padding: 0;
         display: inline-block;
+        vertical-align: top;
     }
 
         .x-form > ul > li {
-            padding-bottom: 20px;
+            padding-bottom: 42px;
+            position: relative;
         }
 
             .x-form > ul > li > label,
@@ -102,7 +109,9 @@ textarea {
         color: #ff0000;
         padding: 5px;
         display: block;
-        text-align: right;
+        position: absolute;
+        font-size: 0.8em;
+        right: 0;
     }
 
     .x-form .input-validation-error {
@@ -134,7 +143,7 @@ div#nav-menu {
     height: 41px;
     font-size: 1.2em;
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
 }
 
@@ -382,6 +391,10 @@ ul.x-day-list {
         height: 16px;
     }
 
+        .x-popup .close-icon:hover {
+            background: url('images/close_hover.png') no-repeat center;
+        }
+
 .x-overlay {
     position: fixed;
     height: 100%;
@@ -449,17 +462,20 @@ table.x-tbl-form > tbody > tr > td:first-child {
     }
 
 #contact.x-form {
-    width: 650px;
+    width: 658px;
     margin: 20px auto;
 }
 
-    #contact.x-form input[type="text"] {
+    #contact.x-form input[type="text"],
+    #contact.x-form ul.msg-entry > li {
         width: 215px;
     }
 
-    #contact.x-form textarea {
-        width: 280px;
-    }
+        #contact.x-form textarea,
+        #contact.x-form ul.msg-entry > li.message,
+        #contact.x-form ul.msg-entry > li.pnl-actions {
+            width: 280px;
+        }
 
     #contact.x-form label {
         display: table;
@@ -480,4 +496,48 @@ table.x-tbl-form > tbody > tr > td:first-child {
 
         #contact.x-form > .info .text {
             color: #888887;
+        }
+
+.vis-wizard > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    width: 100%;
+    border-bottom: 4px solid #60a917;
+}
+
+    .vis-wizard > ul > li {
+        height: 42px;
+        background-color: #fff;
+        display: table-cell;
+        vertical-align: middle;
+        margin: 10px;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+        .vis-wizard > ul > li.arr-inact {
+            background: url('images/wiz_arrow_inactive.png') center center no-repeat #fff;
+            width: 21px;
+        }
+
+        .vis-wizard > ul > li.arr-back {
+            background: url('images/wiz_arrow_back.png') center center no-repeat #fff;
+            width: 21px;
+        }
+
+        .vis-wizard > ul > li.arr {
+            background: url('images/wiz_arrow.png') center center no-repeat #fff;
+            width: 20px;
+        }
+
+        .vis-wizard > ul > li > a {
+            color: #60a917;
+        }
+
+        .vis-wizard > ul > li.active,
+        .vis-wizard > ul > li.active > a {
+            background-color: #60a917;
+            color: #fff;
         }

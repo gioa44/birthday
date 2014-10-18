@@ -1,0 +1,49 @@
+﻿@model Birthday.Web.Models.VisualizationViewModel
+
+@{
+    ViewBag.Title = "TemplateFill";
+    Layout = "~/Views/Shared/_VisualizationLayout.cshtml";
+    ViewBag.CurrentStep = VisualizationSteps.TemplateFill;
+}
+<div>
+    <form method="post">
+        @Html.Raw(Model.Html)
+
+        @for (var i = 0; i < Model.ImageProps.Count; i++)
+        {
+            @Html.HiddenFor(x => x.ImageProps[i].Index)
+            @Html.HiddenFor(x => x.ImageProps[i].Left)
+            @Html.HiddenFor(x => x.ImageProps[i].Top)
+            @Html.HiddenFor(x => x.ImageProps[i].Width)
+        }
+        @for (var i = 0; i < Model.Texts.Count; i++)
+        {
+            @Html.HiddenFor(x => x.Texts[i].Index)
+            @Html.HiddenFor(x => x.Texts[i].Text)
+        }
+        <div class="x-form">
+            <div class="pnl-actions">
+                <a href="@Url.Action("Template")" class="x-button cancel">@GeneralResource.Previous</a>
+                <input class="x-button" type="submit" value="@GeneralResource.Next" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="upload-section" style="display: none;">
+    @using (Html.BeginForm("imageupload", "visualization", FormMethod.Post, htmlAttributes: new { id = "img-upload-form" }))
+    {
+        <input type="file" name="name" /><input id="imageUpload" type="submit" value="Upload" />
+        @Html.Hidden("ImageIndex")
+    }
+</div>
+
+@section styles
+    {
+    <link href="@Url.Content("~/Content/templates/main.css")" rel="stylesheet">
+    <link href="@Url.Content(string.Format("~/Content/templates/{0}/style.css", Model.TemplateName.ToLower()))" rel="stylesheet">
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/imagetools")
+}

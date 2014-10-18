@@ -1,4 +1,5 @@
-﻿using Birthday.Domain.Services;
+﻿using Birthday.Domain;
+using Birthday.Domain.Services;
 using Birthday.Web.ActionFilters;
 using Birthday.Web.Helpers;
 using Birthday.Web.Models;
@@ -27,25 +28,102 @@ namespace Birthday.Web.Controllers
             {
                 SetVisualizationAccessCookie(model.Email, model.Password);
 
-                return RedirectToAction("Visualization");
+                return RedirectToAction("Index");
             }
 
             return View();
         }
 
         [AccessActionFilter]
-        public ActionResult Visualization()
+        public ActionResult Index()
+        {
+            return RedirectToAction("PersonInfo");
+        }
+
+        [AccessActionFilter]
+        public ActionResult PersonInfo()
         {
             var birthday = _BirthdayService.Get(BirthdayID);
+            var model = new PersonInfo();
 
-            var model = new VisualizationViewModel { Html = birthday.Html };
+            model.FirstName = birthday.FirstName;
+            model.LastName = birthday.LastName;
+            model.GenderID = (Genders?)birthday.GenderID;
+            model.Age = birthday.Age;
+            model.MobileNumber = birthday.MobileNumber;
+            model.FacebookUrl = birthday.FacebookUrl;
+            model.Email = birthday.Email;
+
+            return View(model);
+        }
+
+        [AccessActionFilter]
+        [HttpPost]
+        public ActionResult PersonInfo(PersonInfo model)
+        {
+            if (ModelState.IsValid)
+            {
+                var birthday = _BirthdayService.Get(BirthdayID);
+
+                birthday.FirstName = model.FirstName;
+                birthday.LastName = model.LastName;
+                birthday.GenderID = (int?)model.GenderID;
+                birthday.Age = model.Age;
+                birthday.MobileNumber = model.MobileNumber;
+                birthday.FacebookUrl = model.FacebookUrl;
+                birthday.Email = model.Email;
+
+                _BirthdayService.Update(birthday);
+                _BirthdayService.SaveChanges();
+            }
+
+            return RedirectToAction("Template");
+        }
+
+        [AccessActionFilter]
+        public ActionResult Template()
+        {
+            var birthday = _BirthdayService.Get(BirthdayID);
 
             var templateList = new TemplateService(_BirthdayService).GetAll().ToList();
 
             var selectList = new SelectList(templateList, "TemplateID", "Title");
 
+            var model = new TemplateSelect();
+
             model.TemplateList = selectList;
             model.TemplateID = birthday.TemplateID;
+
+            return View(model);
+        }
+
+        [AccessActionFilter]
+        [HttpPost]
+        public ActionResult Template(TemplateSelect model)
+        {
+            if (ModelState.IsValid)
+            {
+                _BirthdayService.SetTemplate(BirthdayID, model.TemplateID.Value);
+
+                return RedirectToAction("TemplateFill");
+            }
+
+            return View(model);
+        }
+
+        [AccessActionFilter]
+        public ActionResult Complete()
+        {
+            return View();
+        }
+
+        [AccessActionFilter]
+        public ActionResult TemplateFill()
+        {
+            var birthday = _BirthdayService.Get(BirthdayID);
+
+            var model = new VisualizationViewModel { Html = birthday.Html };
+
             if (birthday.Template != null)
             {
                 model.TemplateName = birthday.Template.Title;
@@ -58,22 +136,7 @@ namespace Birthday.Web.Controllers
         }
 
         [HttpPost, AccessActionFilter]
-        public ActionResult SetTemplate(int templateID)
-        {
-            try
-            {
-                _BirthdayService.SetTemplate(BirthdayID, templateID);
-            }
-            catch (Exception)
-            {
-                return JsonError();
-            }
-
-            return Json(new { Result = "Ok" });
-        }
-
-        [HttpPost, AccessActionFilter]
-        public ActionResult Visualization(VisualizationViewModel model)
+        public ActionResult TemplateFill(VisualizationViewModel model)
         {
             using (var service = new BirthdayImageService())
             {
@@ -88,7 +151,7 @@ namespace Birthday.Web.Controllers
                 _BirthdayService.UpdateBirthdayText(BirthdayID, item.Index, item.Text);
             }
 
-            return RedirectToAction("Visualization");
+            return RedirectToAction("Complete");
         }
 
         [HttpPost, AccessActionFilter]

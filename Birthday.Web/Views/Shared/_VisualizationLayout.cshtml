@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+
+    <div id="wizard" class="vis-wizard">
+        <ul class="nav">
+            @{
+                int active = 0;
+
+                var links = new Dictionary<VisualizationSteps, string> {
+                   { VisualizationSteps.PersonInfo, Url.Action("PersonInfo") },
+                   { VisualizationSteps.Template, Url.Action("Template") },
+                   { VisualizationSteps.TemplateFill, Url.Action("TemplateFill") },
+                   { VisualizationSteps.Complete, Url.Action("Complete")  }
+                };
+
+                var afterActive = false;
+
+                for (int i = 0; i < links.Count; i++)
+                {
+                    var elem = links.ElementAt(i);
+                    var href = elem.Value;
+                    string css = null;
+                    var isActiveStep = elem.Key == ViewBag.CurrentStep;
+                    var arrowTmpl = @"<li class=""{0}""></li>";
+
+                    if (i > 0)
+                    {
+                        if (isActiveStep)
+                        {
+                @Html.Raw(string.Format(arrowTmpl, "arr-back"))
+                        }
+                        else if (afterActive)
+                        {
+                @Html.Raw(string.Format(arrowTmpl, "arr"))
+                            afterActive = false;
+                        }
+                        else
+                        {
+                @Html.Raw(string.Format(arrowTmpl, "arr-inact"))
+                        }
+                    }
+
+                    if (isActiveStep)
+                    {
+                        href = "#";
+                        active = i;
+                        css = "active";
+                        afterActive = true;
+                    }
+
+                    var text = elem.Key.GetDescription();
+                    
+                <text><li class="@css"><a href="@href">@text</a></li></text>
+                }
+            }
+        </ul>
+        <div id="#active-tab">
+            @RenderBody()
+        </div>
+    </div>
+
+    @{ Html.RenderAction("Navigation", "Home"); }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        Html.RenderPartial("_ErrorMessage");
+    }
+</body>
+</html>

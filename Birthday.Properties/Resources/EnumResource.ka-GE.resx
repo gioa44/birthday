@@ -117,106 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AgreementIsRequiredForReservation" xml:space="preserve">
-    <value>დაჯავშნის განსახორციელებლად აუცილებელია თანხმობა</value>
+  <data name="Complete" xml:space="preserve">
+    <value>დადასტურება</value>
   </data>
-  <data name="AlreadyReserved" xml:space="preserve">
-    <value>"{0:dd MMMM}" უკვე დაჯავშნულია</value>
+  <data name="Female" xml:space="preserve">
+    <value>მდედრობითი</value>
   </data>
-  <data name="AnniversaryHistory" xml:space="preserve">
-    <value>წინა იუბილარები</value>
+  <data name="Male" xml:space="preserve">
+    <value>მამრობითი</value>
   </data>
-  <data name="BirthdayReservation" xml:space="preserve">
-    <value>დაბადების დღის დაჯავშნა</value>
+  <data name="PersonInfo" xml:space="preserve">
+    <value>პირადი ინფორმაცია</value>
   </data>
-  <data name="BirthdayReservationMailBody" xml:space="preserve">
-    <value>თქვენ დაჯავშნეთ დღე - {0:dd MMMM yyyy}:&lt;br/ &gt;ფოსტა: {1};&lt;br/ &gt;პაროლი: {2}.</value>
+  <data name="Template" xml:space="preserve">
+    <value>ტემპლეიტი</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>დახურვა</value>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>კონტაქტი</value>
-  </data>
-  <data name="DayAnniversary" xml:space="preserve">
-    <value>დღის იუბილარი</value>
-  </data>
-  <data name="DayReservation" xml:space="preserve">
-    <value>{0} - დაჯავშნა</value>
-  </data>
-  <data name="DaySuccessfullyReserved" xml:space="preserve">
-    <value>დღე "{0:dd MMMM}" დაჯავშნულია წარმატებით, თქვენს ელ-ფოსტაზე გამოგზავნილია პაროლი</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>ელ-ფოსტა</value>
-  </data>
-  <data name="EmailNotValid" xml:space="preserve">
-    <value>ელ-ფოსტის ფორმატი არასწორია</value>
-  </data>
-  <data name="ErrorOccured" xml:space="preserve">
-    <value>მოხდა შეცდომა, გთხოვთ გადატვირთოთ გვერდი</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>სახელი</value>
-  </data>
-  <data name="FirstNameLastName" xml:space="preserve">
-    <value>სახელი, გვარი</value>
-  </data>
-  <data name="IAgreeToSites" xml:space="preserve">
-    <value>მე ვეთანხმები საიტის</value>
-  </data>
-  <data name="ImageDimensionsWarning" xml:space="preserve">
-    <value>ამ ჩარჩოსთვის სურათის მინიმალური დაშვებული ზომაა - სიგრძე: {0} და სიმაღლე: {1}</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>გვარი</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>შესვლა</value>
-  </data>
-  <data name="Message" xml:space="preserve">
-    <value>შეტყობინება</value>
-  </data>
-  <data name="MessageSent" xml:space="preserve">
-    <value>შეტყობინება გაგზავნილია!</value>
-  </data>
-  <data name="Next" xml:space="preserve">
-    <value>შემდეგი</value>
-  </data>
-  <data name="Previous" xml:space="preserve">
-    <value>წინა</value>
-  </data>
-  <data name="Required" xml:space="preserve">
-    <value>აუცილებელი ველი</value>
-  </data>
-  <data name="Reserve" xml:space="preserve">
-    <value>ჯავშანი</value>
-  </data>
-  <data name="ReserveDay" xml:space="preserve">
-    <value>დაჯავშნე დღე</value>
-  </data>
-  <data name="Rules" xml:space="preserve">
-    <value>წესები</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>შენახვა</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>სათაური</value>
-  </data>
-  <data name="ToReserve" xml:space="preserve">
-    <value>დაჯავშნა</value>
-  </data>
-  <data name="ToRulesAndConditions" xml:space="preserve">
-    <value>მოხმარების წესებს</value>
-  </data>
-  <data name="Visualization" xml:space="preserve">
-    <value>ვიზუალიზაცია</value>
-  </data>
-  <data name="YouChose" xml:space="preserve">
-    <value>თქვენ აირჩიეთ {0}</value>
-  </data>
-  <data name="YourEmail" xml:space="preserve">
-    <value>თქვენი ელ-ფოსტა</value>
+  <data name="TemplateFill" xml:space="preserve">
+    <value>ტემპლეიტის შევსება</value>
   </data>
 </root>

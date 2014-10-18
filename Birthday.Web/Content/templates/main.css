@@ -10,7 +10,7 @@
     .tmpl .txt {
         position: relative;
         display: inline-block;
-        white-space: pre;
+        white-space: pre-wrap;
         background-color: transparent;
         border: none;
         outline: none;

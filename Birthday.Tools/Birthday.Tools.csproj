@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes.cs" />
     <Compile Include="CodeGenerator.cs" />
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="ImageTool.cs" />
     <Compile Include="MailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

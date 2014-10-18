@@ -30,7 +30,7 @@ namespace Birthday.Web.Models
             AddItem(GeneralResource.DayAnniversary, "Index", "Home");
             AddItem(GeneralResource.Rules, "Rules", "Home");
             AddItem(GeneralResource.Reserve, "Reserve", "Home");
-            _Items.Add(new Item(GeneralResource.Visualization, "Visualization", "Visualization", controller == "Visualization"));
+            _Items.Add(new Item(GeneralResource.Visualization, "Index", "Visualization", controller == "Visualization"));
             AddItem(GeneralResource.AnniversaryHistory, "AnniversaryHistory", "Home");
             AddItem(GeneralResource.Contact, "Contact", "Home");
         }

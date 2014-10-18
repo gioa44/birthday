@@ -1,0 +1,54 @@
+﻿@model Birthday.Web.Models.PersonInfo
+@{
+    Layout = "~/Views/Shared/_VisualizationLayout.cshtml";
+    ViewBag.CurrentStep = VisualizationSteps.PersonInfo;
+}
+<div id="personinfo">
+    @using (Html.BeginForm())
+    {
+        <div class="x-form">
+            <ul>
+                <li>
+                    @Html.LabelFor(x => x.FirstName)
+                    @Html.TextBoxFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.LastName)
+                    @Html.TextBoxFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.GenderID)
+                    @Html.SelectListFor(x => x.GenderID, typeof(Birthday.Domain.Genders))
+                    @Html.ValidationMessageFor(x => x.GenderID)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Age)
+                    @Html.TextBoxFor(x => x.Age)
+                    @Html.ValidationMessageFor(x => x.Age)
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    @Html.LabelFor(x => x.MobileNumber)
+                    @Html.TextBoxFor(x => x.MobileNumber)
+                    @Html.ValidationMessageFor(x => x.MobileNumber)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.FacebookUrl)
+                    @Html.TextBoxFor(x => x.FacebookUrl)
+                    @Html.ValidationMessageFor(x => x.FacebookUrl)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Email)
+                    @Html.TextBoxFor(x => x.Email)
+                    @Html.ValidationMessageFor(x => x.Email)
+                </li>
+            </ul>
+            <div class="pnl-actions">
+                <input type="submit" value="Next" class="x-button" />
+            </div>
+        </div>
+    }
+</div>
