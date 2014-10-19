@@ -36,8 +36,8 @@ namespace Birthday.Web.ActionFilters
                 }
             }
             catch { }
-
-            filterContext.Result = new RedirectResult("VisualizationLogin");
+            
+            filterContext.Result = new RedirectResult((filterContext.Controller as Controller).Url.Action("VisualizationLogin", "Visualization"));
         }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
