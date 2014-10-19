@@ -158,6 +158,7 @@
     <Content Include="Content\images\dot.png" />
     <Content Include="Content\images\gift_green.png" />
     <Content Include="Content\images\gift_grey.png" />
+    <Content Include="Content\images\gift_orange.png" />
     <Content Include="Content\images\load.gif" />
     <Content Include="Content\images\wiz_arrow.png" />
     <Content Include="Content\images\wiz_arrow_back.png" />
