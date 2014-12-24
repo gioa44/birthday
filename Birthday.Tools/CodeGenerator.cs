@@ -9,7 +9,7 @@ namespace Birthday.Tools
         public static string GetCode(int size)
         {
             var result = new char[9];
-
+            //other test comment
             var characterArray = CharacterSet.ToCharArray();
             var arr = new byte[1];
 

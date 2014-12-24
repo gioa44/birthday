@@ -22,6 +22,7 @@ namespace Birthday.Tools
 
         public static void SendMail(string mailTo, string subject, string body)
         {
+            //test comment
             if (string.IsNullOrEmpty(mailTo))
             {
                 return;
